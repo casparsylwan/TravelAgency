@@ -1,0 +1,75 @@
+.destination
+{
+    display: flex;
+}
+
+.search-container
+{
+    height: 20rem;
+    width: 40rem;
+
+    margin-left:2rem;
+
+    display: flex;
+    align-items: center;
+
+    background-color: #eee;
+    border-radius: 1rem;
+
+    display: flex;
+    flex-direction: column;
+
+   
+}
+
+.h2-destination
+{
+
+    margin: 2rem 0 0 0;
+
+    font-size: 1.5rem;
+    font-weight: bolder;
+
+}
+
+form
+{
+    width: 80%;
+}
+
+
+
+.search-destination
+{
+    
+    margin:1rem 0 0 0;
+    display: flex;
+    justify-content: space-between; 
+}
+
+.typeof-travel>select
+{
+    margin: 2rem 2rem 0 0;
+    height: 1.5rem;
+    border-radius:5px;
+}
+
+.searchbox
+{
+    display: flex;
+    flex-direction: column;
+
+    width: 45%;
+}
+
+.searchbox>label
+{
+    font-weight: bold;
+    font-size:1.5rem;
+}
+
+.searchbox>input
+{
+    height: 2rem;
+    border-radius: 5px;
+}

@@ -1,1 +1,9 @@
-<p>booking works!</p>
+<section class="background">
+    <app-order-completation></app-order-completation>
+    <div [@triggerName]="prepareRoute(outlet)">
+        <router-outlet #outlet="outlet"></router-outlet>
+    </div>    
+</section>
+<!--
+    
+-->
