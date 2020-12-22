@@ -1,1 +1,29 @@
-<p>seat works!</p>
+<section class="plane">
+    <div class="plane-seats">
+        <div  class="window-left">
+            <div *ngFor="let seat of windowLeft ">
+                <div class="seat-outline">
+                    {{ seat.seatNumber }}
+                </div>
+            </div> 
+        </div>
+
+        <div  class="aisle">
+            <div *ngFor="let seat of aisle" class="seat-outline">
+                    {{ seat.seatNumber }}
+            </div>
+        </div>
+
+        <div class="window-right">
+            <div *ngFor="let seat of windowRight" class="seat-outline">
+                    {{ seat.seatNumber }}   
+            </div>
+        </div>
+
+    </div>
+    <div class="seat-order">
+        <h2>Orders and needs</h2>
+        <h3>travling passagers</h3>
+    </div>
+</section>
+

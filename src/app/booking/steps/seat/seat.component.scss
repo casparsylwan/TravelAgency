@@ -1,0 +1,83 @@
+.plane
+{
+    display:flex;
+    justify-content: center;
+
+    .plane-seats, .seat-order
+    {
+        width: 30rem;
+        background-color: #aaa;
+
+        margin: 0rem 1rem 0rem 0;
+        border-radius: 10px; 
+        
+        text-align:center;
+    }
+
+    .plane-seats
+    {
+        padding:3rem .0rem 2rem .0rem;
+
+        display:grid;
+        justify-content: space-between;
+        align-items: start;
+        grid-template-columns: auto auto auto;       
+
+    }
+}
+
+.window-left
+{
+    
+    display:grid;
+    justify-items: start;
+    align-items: start;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.3rem;
+    grid-row-gap: 1rem;
+}
+
+.aisle
+{
+    
+    display:grid;
+    justify-items: center;
+    align-items: start;
+    grid-template-columns: auto auto auto;
+    gap: 0.3rem;
+    grid-row-gap: 1rem;
+
+}
+
+.window-right
+{
+    
+    display:grid;
+    align-items: start;
+    justify-items: end;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.3rem;
+    grid-row-gap: 1rem;
+    
+}
+
+
+.seat-outline 
+{
+
+    border:solid black 1px;
+
+    height: 4rem;
+    width: 3rem;
+}
+
+h2, h3{
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin:0.5rem
+}
+
+h3
+{
+    font-size: 1.2rem;
+}

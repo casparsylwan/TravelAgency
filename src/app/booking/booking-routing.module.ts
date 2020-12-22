@@ -8,7 +8,8 @@ import { SeatComponent } from './steps/seat/seat.component';
 const routes: Routes = [
   { path: '', component: BookingComponent },
   { path: 'seat', component: SeatComponent},
-  { path: 'payment', component: PaymentComponent}
+  { path: 'payment', component: PaymentComponent},
+  { path: '**', redirectTo: '' ,component: BookingComponent }
 ];
 
 @NgModule({
