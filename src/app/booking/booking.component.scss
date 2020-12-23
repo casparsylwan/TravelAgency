@@ -1,0 +1,13 @@
+.background
+{
+    
+    background-image: url("../../assets/img/map.png");
+    background-repeat: no-repeat, repeat;
+    background-size: contain;
+    background-position: center;
+    background-color: #cccccc;
+    background-attachment: fixed;
+    min-height: calc(100vh - 3rem);
+    overflow-y: hidden;
+//    overflow-x: hidden;
+}

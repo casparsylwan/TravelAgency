@@ -20,14 +20,16 @@ ul
     border-radius: 100%;
     background: dodgerblue;
     color: white;
-    transition: transform 0.5s ease, background 1s ease; 
-
+    border:#fff 2px transparent;
+    transition: transform 0.5s ease, background 1s ease, border 1s ease-in; 
+    
+    
 }
 
-  .circle:hover{
-    transform: scale(1.2, 1.2);
+  // .circle:hover{
+  //  // transform: scale(1.2, 1.2);
     
-  }
+  // }
 
   .line{
       align-self:center;
@@ -44,9 +46,23 @@ ul
       background: green;
   }
 
-  a
+  .circle.active
+  {
+    border:#fff 2px solid;
+    
+  }
+
+  .border.aktive
   {
     
+    height: 1px;
+    width:  1px;
+  }
+
+  a
+  {
     font-weight: bolder;
     font-size: 2rem;
   }
+
+  
