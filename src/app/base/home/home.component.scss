@@ -1,0 +1,15 @@
+.background
+{
+    
+    background-image: url("/assets/img/Cityscape.svg");
+    background-repeat: no-repeat, repeat;
+    background-size: 100vw;
+    background-position: center bottom;
+    background-color: #cccccc;
+    min-height: calc(100vh - 4rem);
+}
+
+svg{
+    
+    width: 100%;
+}
