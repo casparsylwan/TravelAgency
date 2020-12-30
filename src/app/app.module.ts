@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './base/home/home.component';
 import { NavbarComponent } from './base/navbar/navbar.component';
 import { LoginModule } from './login/login.module';
+import { OffersModule } from './offers/offers.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { LoginModule } from './login/login.module';
     BrowserAnimationsModule,
     CommonModule,
     HttpClientModule,
-    LoginModule 
+    LoginModule,
+    OffersModule 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
