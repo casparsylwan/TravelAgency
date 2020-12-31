@@ -7,6 +7,7 @@ const routes: Routes = [
   {path: '', component: HomeComponent},
   { path: 'booking', loadChildren: () => import('./booking/booking.module').then(m => m.BookingModule) },
   { path: 'login', component: LoginContainerComponent},
+  { path: 'login/:new', component: LoginContainerComponent },
   { path: '**', redirectTo: ''}];
 
 @NgModule({

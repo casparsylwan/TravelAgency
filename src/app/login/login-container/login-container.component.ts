@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-login-container',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginContainerComponent implements OnInit {
 
-  constructor() { }
+  showRegister:string | null = '';
+  
+
+  constructor(private route:ActivatedRoute) { }
 
   ngOnInit(): void {
+
+    // console.log(this.route.snapshot.params['new']); 
+    // this.showRegister = this.route.snapshot.params['new']
+    this.route.paramMap.subscribe((param:ParamMap) => {
+      
+      this.showRegister = param.get('new');
+    })
   }
 
 }

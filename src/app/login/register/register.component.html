@@ -1,6 +1,4 @@
-<section class="sendpassword">
-
-<!--  -->
+<section [class]="showRegister" class="sendpassword">
 
     <h2>Register an account </h2>
     <h3>Get the best deals!</h3>
@@ -28,10 +26,8 @@
     </form>
     <button class="btn-sign-in">SIGNUP</button>
     <div class="forgot-password">
-            <a>
-                already registered? Sign in!
-            </a>
-            
-            
-        </div>
+        <a [routerLink]="'/login'" >
+            already registered? Sign in!
+        </a>            
+    </div>
 </section>

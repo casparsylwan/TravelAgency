@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { StateService } from 'src/app/shared/state.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { StateService } from 'src/app/shared/state.service';
 })
 export class RegisterComponent implements OnInit {
 
-  jwt$:string = "";
+  showRegister:string | null = '';
 
   registerForm = this.fb.group({
 
@@ -23,11 +24,16 @@ export class RegisterComponent implements OnInit {
   
 
   constructor(private state:StateService,
-              private fb:FormBuilder) { }
+              private fb:FormBuilder,
+              private route:ActivatedRoute) { }
 
   ngOnInit(): void {
 
-    this.state.jwt$.subscribe(value => this.jwt$ = value);
+    this.route.paramMap.subscribe((param:ParamMap) => {
+      
+      this.showRegister = param.get('new');
+    })
+    
   }
 
 }
