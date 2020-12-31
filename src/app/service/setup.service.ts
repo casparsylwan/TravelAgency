@@ -13,6 +13,7 @@ export class SetupService {
 
   public setUpCall():Observable<any>
   {
+    
     return this.http.get(`${this.baseUrl}/ping`, {responseType:'text'})
   }
 

@@ -1,1 +1,37 @@
-<p>register works!</p>
+<section class="sendpassword">
+
+<!--  -->
+
+    <h2>Register an account </h2>
+    <h3>Get the best deals!</h3>
+    <form [formGroup]="registerForm">
+        <div class="input text">
+            <label for="firstNameNew">First name</label>
+            <input id="firstNameNew" name="firstNameNew" type="text" formControlName="firstNameNew" placeholder="First name">
+        </div>
+        <div class="input text">
+            <label for="lastNameNew">Surname</label>
+            <input id="lastNameNew" name="lastNameNew" type="text" formControlName="lastNameNew" placeholder="Surname">
+        </div>
+        <div class="input text">
+            <label for="EmailNew">E-mail</label>
+            <input id="EmailNew" name="EmailNew" type="text" formControlName="EmailNew" placeholder="E-mail">
+        </div>
+        <div class="input password">
+            <label for="passwordNew">Password</label>
+            <input id="passwordNew" name="passwordNew" type="password" formControlName="passwordNew" placeholder="Password">
+        </div>
+        <div class="input password">
+            <label for="repasswordNew">Confirm password</label>
+            <input id="repasswordNew" name="repasswordNew" type="password" formControlName="rePasswordNew" placeholder="Confirm password">
+        </div>
+    </form>
+    <button class="btn-sign-in">SIGNUP</button>
+    <div class="forgot-password">
+            <a>
+                already registered? Sign in!
+            </a>
+            
+            
+        </div>
+</section>
