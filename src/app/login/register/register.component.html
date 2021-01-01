@@ -24,11 +24,12 @@
             <input id="repasswordNew" name="repasswordNew" type="password" formControlName="rePasswordNew" placeholder="Confirm password">
         </div>
     </form>
-    <button class="btn-sign-in">SIGNUP</button>
+    <button (click)="createNewCustomer()" class="btn-sign-in">SIGNUP</button>
     <div class="forgot-password">
         <a [routerLink]="'/login'" >
             already registered? Sign in!
         </a>            
     </div>
-    {{ customer$ | json }}
+    <!-- {{ registerForm.value | json }} -->
+    <!-- {{ customer$ | json }} -->
 </section>

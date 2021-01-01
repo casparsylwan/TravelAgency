@@ -25,9 +25,9 @@ export class LoginAuthService implements OnInit{
     return this.http.post<{jwt:string}>(`${this.baseUrl}/authenticate`,body);
   }
 
-  httpCreateCustomer(body:Customer)
+  httpCreateCustomer(body:any):Observable<Customer>
   {
-    return this.http.post<Customer>(`${this.baseUrl}\customer\new`, body);
+    return this.http.post<Customer>(`${this.baseUrl}/customer/new`, body);
   }
 
   httpGetCustomer(email:string, jwt:string):Observable<Customer>

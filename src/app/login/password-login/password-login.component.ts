@@ -45,13 +45,11 @@ export class PasswordLoginComponent implements OnInit {
                               }
 
     this.httpLogin.httpLogin(body).subscribe((jwt) =>{
-      // this.state.setJwt(jwt.jwt);
-      // this.message$ = jwt.jwt;
+
 
         this.httpLogin.httpGetCustomer(body.username, jwt.jwt ).subscribe((customer:Customer) =>{
 
           customer.jwt = jwt.jwt;
-          console.log(jwt.jwt);
           this.state.setCustomer(customer);
 
          console.log(1, customer);
