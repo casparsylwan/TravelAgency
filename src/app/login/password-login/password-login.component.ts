@@ -14,7 +14,7 @@ import { StateService } from 'src/app/shared/state.service';
 })
 export class PasswordLoginComponent implements OnInit {
  
-  message$:string = "";
+  // message$:string = "";
   showLogin:string | null = '';
 
   loginForm = this.fb.group({
@@ -45,11 +45,16 @@ export class PasswordLoginComponent implements OnInit {
                               }
 
     this.httpLogin.httpLogin(body).subscribe((jwt) =>{
-      this.state.setValue(jwt.jwt);
-      this.message$ = jwt.jwt;
+      // this.state.setJwt(jwt.jwt);
+      // this.message$ = jwt.jwt;
 
-        this.httpLogin.httpGetCustomer(body.username, this.message$ ).subscribe((customer:Customer) =>{
-        console.log(customer);
+        this.httpLogin.httpGetCustomer(body.username, jwt.jwt ).subscribe((customer:Customer) =>{
+
+          customer.jwt = jwt.jwt;
+          console.log(jwt.jwt);
+          this.state.setCustomer(customer);
+
+         console.log(1, customer);
       })
     })
 
@@ -58,10 +63,10 @@ export class PasswordLoginComponent implements OnInit {
     
   }
 
-  setElementRef()
-  {
-    this.state.setValue(this.loginForm.value.Email);
+  // setElementRef()
+  // {
+  //   this.state.setJwt(this.loginForm.value.Email);
     
-  }
+  // }
 
 }

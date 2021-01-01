@@ -1,13 +1,14 @@
 export class Customer{
 
-    jwt:string | undefined
+    jwt:string = '';
 
-    firstName:string | undefined
+    email:string = '';
 
-    lastName:string | undefined
+    firstName:string = '';
 
-    
+    lastName:string = '';
 
+    roles:string = 'CUSTOMER';
 
     constructor(jwt:string){}
 

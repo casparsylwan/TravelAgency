@@ -1,4 +1,7 @@
+import { state } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { Customer } from 'src/app/models/Customer';
+import { StateService } from 'src/app/shared/state.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  
+  customer$:Customer | null = null;
+
+  constructor(private state:StateService) { }
 
   ngOnInit(): void {
+
+    this.state.customer$.subscribe((customer) => this.customer$ = customer )
+
   }
 
 }

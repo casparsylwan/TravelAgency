@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Customer } from 'src/app/models/Customer';
 import { StateService } from 'src/app/shared/state.service';
 
 @Component({
@@ -22,6 +23,7 @@ export class RegisterComponent implements OnInit {
 
   })
   
+  customer$:Customer | null = null;
 
   constructor(private state:StateService,
               private fb:FormBuilder,
@@ -29,10 +31,14 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.state.customer$.subscribe((customer) => this.customer$ = customer )
+
     this.route.paramMap.subscribe((param:ParamMap) => {
       
       this.showRegister = param.get('new');
     })
+
+    
     
   }
 

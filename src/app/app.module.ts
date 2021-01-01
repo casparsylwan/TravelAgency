@@ -10,6 +10,7 @@ import { HomeComponent } from './base/home/home.component';
 import { NavbarComponent } from './base/navbar/navbar.component';
 import { LoginModule } from './login/login.module';
 import { OffersModule } from './offers/offers.module';
+import { StateService } from './shared/state.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { OffersModule } from './offers/offers.module';
     OffersModule 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [StateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

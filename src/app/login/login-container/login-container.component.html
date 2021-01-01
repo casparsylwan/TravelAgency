@@ -1,6 +1,6 @@
 <section class="background">
     <div class="loginbox">
-        <app-register class="register" ></app-register>
-        <app-password-login class="signup"></app-password-login>
+        <app-register *ngIf="showRegister == 'new'" class="register" ></app-register>
+        <app-password-login *ngIf="showRegister != 'new'" class="signup"></app-password-login>
     </div>
 </section>

@@ -3,7 +3,7 @@
     <a [routerLink]="['/login']" class="login">
         Login
     </a>
-    <div class="make-space"></div>
+    <div class="make-space">{{ customer$ | json }}</div>
     <a [routerLink]="['/']" class="heading">
         <img src="assets/img/headingux.svg" alt="Flight loggo"/>
     </a>
