@@ -2,12 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './base/home/home.component';
 import { LoginContainerComponent } from './login/login-container/login-container.component';
+import { LoggedinGuard } from './service/auth/loggedin.guard';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   { path: 'booking', loadChildren: () => import('./booking/booking.module').then(m => m.BookingModule) },
-  { path: 'login', component: LoginContainerComponent},
-  { path: 'login/:new', component: LoginContainerComponent },
+  { path: 'login', component: LoginContainerComponent,  canActivate: [LoggedinGuard]},
+  { path: 'login/:new', component: LoginContainerComponent,  canActivate: [LoggedinGuard]},
   { path: 'mypages', loadChildren: () => import('./mypages/mypages.module').then(m => m.MypagesModule) },
   { path: '**', redirectTo: ''}];
 
