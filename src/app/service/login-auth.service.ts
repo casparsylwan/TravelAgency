@@ -13,12 +13,12 @@ export class LoginAuthService implements OnInit{
   baseUrl:string = "https://travelagencyspringboot.herokuapp.com/api/v1";
   
 
-  constructor(private http:HttpClient,
-              private state:StateService) { }
-  ngOnInit(): void {
-    
-    
-  }
+  constructor(
+              private http:HttpClient,
+              private state:StateService
+              ) { }
+
+  ngOnInit(): void {}
 
   httpLogin(body:Authentication):Observable<{jwt:string}>
   {

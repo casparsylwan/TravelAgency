@@ -21,4 +21,26 @@ export class NavbarComponent implements OnInit {
 
   }
 
+  loggedIn():boolean
+  {
+    if(this.customer$ == null)
+    {
+      return false;
+    }
+    else if(this.customer$.jwt.length<5)
+    {
+      return false;
+    }
+    else
+    {
+      return true;
+    }
+  }
+
+  logout()
+  {
+    const customer:Customer = new Customer('');
+    this.state.setCustomer(customer);
+  }
+
 }

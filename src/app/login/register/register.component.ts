@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Customer } from 'src/app/models/Customer';
 import { Authentication } from 'src/app/models/Authentication';
 import { LoginAuthService } from 'src/app/service/login-auth.service';
@@ -30,6 +30,7 @@ export class RegisterComponent implements OnInit {
   constructor(private state:StateService,
               private fb:FormBuilder,
               private route:ActivatedRoute,
+              private router:Router,
               private httpLogin:LoginAuthService) { }
 
   ngOnInit(): void {
@@ -64,6 +65,7 @@ export class RegisterComponent implements OnInit {
       this.httpLogin.httpLogin(authBody).subscribe((jwtBody) =>{
         customer.jwt = jwtBody.jwt
         this.state.setCustomer(customer);
+        this.router.navigate(['/mypages'])
       })
     })
   } 

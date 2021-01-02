@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router, Router } from '@angular/router';
 import { Authentication } from 'src/app/models/Authentication';
 import { Customer } from 'src/app/models/Customer';
 import { LoginAuthService } from 'src/app/service/login-auth.service';
@@ -24,10 +24,13 @@ export class PasswordLoginComponent implements OnInit {
 
   })
 
-  constructor(private fb:FormBuilder,
+  constructor(
+              private fb:FormBuilder,
               private state:StateService,
               private httpLogin:LoginAuthService,
-              private route:ActivatedRoute) { }
+              private route:ActivatedRoute,
+              private router:Router
+              ) { }
 
   ngOnInit(): void {
 
@@ -52,7 +55,7 @@ export class PasswordLoginComponent implements OnInit {
           customer.jwt = jwt.jwt;
           this.state.setCustomer(customer);
 
-         console.log(1, customer);
+          this.router.navigate(['/mypages'])
       })
     })
 
@@ -60,11 +63,5 @@ export class PasswordLoginComponent implements OnInit {
 
     
   }
-
-  // setElementRef()
-  // {
-  //   this.state.setJwt(this.loginForm.value.Email);
-    
-  // }
 
 }
