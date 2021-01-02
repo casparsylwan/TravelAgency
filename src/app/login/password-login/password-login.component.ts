@@ -14,7 +14,6 @@ import { StateService } from 'src/app/shared/state.service';
 })
 export class PasswordLoginComponent implements OnInit {
  
-  // message$:string = "";
   showLogin:string | null = '';
 
   loginForm = this.fb.group({
