@@ -48,7 +48,7 @@
     box-shadow: 0 10px 25px rgba($color: #000000, $alpha: 0.3);
     font-size: 1.5rem;
     padding: 0.5rem 3rem 0.5rem 1em;
-    margin: 0rem 2rem 0 0;
+    margin: 2rem 2rem 0 0;
     
     border-radius: 2rem;
 
@@ -72,23 +72,6 @@
     
 }
 
-// .select-input
-// {
-//     width:10rem;
-//     height: 2rem;
-//     border-radius: 100%;
-//     line-height: 2rem;
-    
-//    background-color: black;
-//     option
-//     {
-//        padding: 2rem; 
-//     }
-// }
-
-
-
-
 
 .search-destination
 {
@@ -98,29 +81,38 @@
     justify-content: space-between; 
 }
 
-// .typeof-travel>select
-// {
-//     margin: 2rem 2rem 0 0;
-//     height: 1.5rem;
-//     border-radius:5px;
-// }
-
 .searchbox
 {
     display: flex;
     flex-direction: column;
+
+    background-color: #fff;
+    box-shadow: 0 10px 25px rgba($color: #000000, $alpha: 0.3);
+    border-radius: 5px;
 
     width: 45%;
 }
 
 .searchbox>label
 {
-    font-weight: bold;
-    font-size:1.5rem;
+    font-weight: lighter;
+    font-size:1rem;
+    margin: 0.2rem 1rem 1rem 0.2rem;
+
+    color: #777;
 }
 
 .searchbox>input
 {
     height: 2rem;
+    border:none;
+    margin:0.3rem;
+
+    font-size: 1.2rem;
     border-radius: 5px;
+
+    &:focus
+    {
+        outline:none;
+    }
 }
