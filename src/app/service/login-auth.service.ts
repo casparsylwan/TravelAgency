@@ -1,9 +1,12 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Authentication } from '../models/Authentication';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { StateService } from '../shared/state.service';
 import { Customer } from '../models/Customer';
+import { Router } from '@angular/router';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +18,8 @@ export class LoginAuthService implements OnInit{
 
   constructor(
               private http:HttpClient,
-              private state:StateService
+              private state:StateService,
+              private router:Router
               ) { }
 
   ngOnInit(): void {}
@@ -23,6 +27,22 @@ export class LoginAuthService implements OnInit{
   httpLogin(body:Authentication):Observable<{jwt:string}>
   {
     return this.http.post<{jwt:string}>(`${this.baseUrl}/authenticate`,body);
+  }
+
+  httpGetCustomerAndSetState(email:string, jwt:string):void
+  {
+    this.httpGetCustomer(email, jwt).subscribe((customer) => {
+
+      customer.jwt = jwt;
+      this.state.setCustomer(customer);
+        
+    },
+    (error) =>{
+      console.log("ERROR: ", error)
+      sessionStorage.removeItem('travelux')
+      this.router.navigate(['/login']);
+
+    })
   }
 
   httpCreateCustomer(body:any):Observable<Customer>

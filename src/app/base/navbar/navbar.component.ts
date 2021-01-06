@@ -41,6 +41,7 @@ export class NavbarComponent implements OnInit {
   {
     const customer:Customer = new Customer('');
     this.state.setCustomer(customer);
+    sessionStorage.removeItem('travelux')
   }
 
 }

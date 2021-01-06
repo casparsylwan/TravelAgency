@@ -16,19 +16,26 @@ export class LoggedinGuard implements CanActivate{
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
       this.state.customer$.subscribe((customer) => this.customer$ = customer )
-      if(this.customer$ == null)
+      let tokenStr = sessionStorage.getItem('travelux')
+      
+      if(this.customer$ == null || tokenStr == null)
       {
-        console.log("null: ", this.customer$)
+        
         return true;
       }
-      if(this.customer$.jwt.length<3)
+       else if(JSON.parse(tokenStr).jwt.length > 2)
       {
-        console.log( "Auth1",this.customer$.jwt)
+        
+        return this.router.navigate(['/mypages']);
+      }
+      else if(this.customer$.jwt.length < 2)
+      {
+        
         return true;
       }
       else
       {
-        console.log( "Auth2",this.customer$.jwt)
+        
         return this.router.navigate(['/mypages'])
       }
   }

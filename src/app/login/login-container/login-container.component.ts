@@ -16,8 +16,7 @@ export class LoginContainerComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // console.log(this.route.snapshot.params['new']); 
-    // this.showRegister = this.route.snapshot.params['new']
+    
     this.route.paramMap.subscribe((param:ParamMap) => {
       
       this.showRegister = param.get('new');

@@ -3,7 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { MypagesComponent } from './mypages.component';
 
-const routes: Routes = [{ path: '', component: MypagesComponent }];
+const routes: Routes = [
+  { path: '', component: MypagesComponent },
+  { path: ':view', component: MypagesComponent }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

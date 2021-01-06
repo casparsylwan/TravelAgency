@@ -54,8 +54,6 @@ export class RegisterComponent implements OnInit {
       active    : true
     }
 
-    console.log(body);
-
     this.httpLogin.httpCreateCustomer(body).subscribe((customer) =>{
 
       const authBody:Authentication = 

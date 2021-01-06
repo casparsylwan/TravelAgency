@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Airport } from '../models/airport';
+import { TravelService } from '../service/travel.service';
 
 @Component({
   selector: 'app-mypages',
@@ -7,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MypagesComponent implements OnInit {
 
-  constructor() { }
+  headingsAdmin:string = "New travel destination";
+
+  constructor(private ts:TravelService) { }
 
   ngOnInit(): void {
   }

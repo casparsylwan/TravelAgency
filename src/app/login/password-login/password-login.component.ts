@@ -4,6 +4,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Authentication } from 'src/app/models/Authentication';
 import { Customer } from 'src/app/models/Customer';
 import { LoginAuthService } from 'src/app/service/login-auth.service';
+import { SessionService } from 'src/app/service/session.service';
 import { StateService } from 'src/app/shared/state.service';
 
 
@@ -15,6 +16,7 @@ import { StateService } from 'src/app/shared/state.service';
 export class PasswordLoginComponent implements OnInit {
  
   showLogin:string | null = '';
+  customer$:Customer | null = null;
 
   loginForm = this.fb.group({
 
@@ -28,10 +30,13 @@ export class PasswordLoginComponent implements OnInit {
               private state:StateService,
               private httpLogin:LoginAuthService,
               private route:ActivatedRoute,
-              private router:Router
+              private router:Router,
+              private session:SessionService
               ) { }
 
   ngOnInit(): void {
+
+    this.state.customer$.subscribe((customer) => this.customer$ = customer)
 
     this.route.paramMap.subscribe((param:ParamMap) => {     
     this.showLogin = param.get('new');
@@ -53,7 +58,7 @@ export class PasswordLoginComponent implements OnInit {
 
           customer.jwt = jwt.jwt;
           this.state.setCustomer(customer);
-
+          sessionStorage.setItem('travelux', JSON.stringify(this.customer$))
           this.router.navigate(['/mypages'])
       })
     })

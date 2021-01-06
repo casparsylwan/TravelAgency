@@ -1,0 +1,56 @@
+<div class="container-destinations">
+    <div class="box-destinations">
+        <form [formGroup]="airportForm">
+            <div class="input-box">
+                <label for="name">Airport Name</label>
+                <input id="name" name="name" type="text" formControlName="airportName" placeholder="Airport">
+            </div>
+            <div class="input-box">
+                <label for="country">Country</label>
+                <input id="country" name="country" type="text" formControlName="country" placeholder="country">
+            </div>
+            <div class="input-box">
+                <label for="city">City</label>
+                <input id="city" name="city" type="text" formControlName="city" placeholder="city">
+            </div>
+        </form>
+        <button (click)="createAirport()" class="btn-new">SEND</button>
+        <!-- {{ airportForm.value |json }} -->
+        {{ customer$ | json }}
+    </div>
+    <div class="box-destinations">
+        <form>
+            <div class="input-box">
+                <label for="" > From airport</label>
+                <select name="" id=""></select>
+            </div>
+            <div class="input-box">
+                <label for=""> To airport</label>
+                <select name="" id=""></select>
+            </div>
+        </form>
+
+
+    </div>
+    <div class="box-destinations">
+
+        <table>
+            <thead>
+                <tr>
+                  <th>Airport</th>
+                  <th>Country</th>
+                  <th>City</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let airport of airports$">
+                    <td>{{ airport.name }}</td>
+                    <td>{{ airport.country }}</td>
+                    <td> {{ airport.city }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <blockquote> Airports </blockquote>
+        
+    </div>
+</div>

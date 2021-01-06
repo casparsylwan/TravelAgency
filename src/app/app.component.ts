@@ -20,7 +20,7 @@ export class AppComponent implements OnInit{
   getInitalValues():void
   {
     this.setup.setUpCall().subscribe((value) =>{
-      console.log(value);
+      
       this.title = value;
     })
   }
