@@ -16,21 +16,7 @@
         </form>
         <button (click)="createAirport()" class="btn-new">SEND</button>
         <!-- {{ airportForm.value |json }} -->
-        {{ customer$ | json }}
-    </div>
-    <div class="box-destinations">
-        <form>
-            <div class="input-box">
-                <label for="" > From airport</label>
-                <select name="" id=""></select>
-            </div>
-            <div class="input-box">
-                <label for=""> To airport</label>
-                <select name="" id=""></select>
-            </div>
-        </form>
-
-
+        <!-- {{ customer$ | json }} -->
     </div>
     <div class="box-destinations">
 
@@ -40,6 +26,8 @@
                   <th>Airport</th>
                   <th>Country</th>
                   <th>City</th>
+                  <th>From</th>
+                  <th>To</th>
                 </tr>
             </thead>
             <tbody>
@@ -47,10 +35,106 @@
                     <td>{{ airport.name }}</td>
                     <td>{{ airport.country }}</td>
                     <td> {{ airport.city }}</td>
+                    <td (click)="setDepartureAirport(airport)">Add</td>
+                    <td (click)="setArrivalAirport(airport)">Add</td>
                 </tr>
             </tbody>
         </table>
-        <blockquote> Airports </blockquote>
+        <!-- <blockquote> Airports </blockquote> -->
         
     </div>
+    <!--Create trip-->
+
+    <div class="box-destinations">
+        <h3 class="travel-h3">Create an offer</h3>
+        <div class="radio-row">
+            <div class="input-box radio">
+                <input type="radio" id="oneway" name="oneway" value="oneway">
+                <label for="oneway">One way</label>
+            </div>
+            <div class="input-box radio">
+                <input type="radio" id="return" name="oneway" value="return">
+                <label for="return">Return</label><br>
+            </div>
+        </div>
+        <div class="airport-travel">
+            <div class="from">
+                <div class="input-box">
+                   <h3>
+                        Departure Airport
+                    </h3>
+                    <div class="airportname">
+                        {{ departureAirport.name }}
+                    </div> 
+                </div>
+                <div class="input-box">
+                    <h3>
+                         From City
+                     </h3>
+                     <div class="airportname">
+                         {{ departureAirport.city }}
+                     </div> 
+                 </div>
+                 <div class="input-box">
+                    <h3>
+                         In Country
+                     </h3>
+                     <div class="airportname">
+                         {{ departureAirport.country }}
+                     </div> 
+                 </div>
+                 <div class="input-box">
+                    <h3>
+                         Departure date
+                     </h3>
+                     <input type="date" [value]="departureDate">
+                 </div>
+                
+                
+
+
+            </div>
+            <div class="to">
+                <div class="input-box">
+                    <h3>
+                        Arrival Airport
+                    </h3>
+                    <div class="airportname">
+                        {{ arrivalAirport.name }}
+                    </div>
+                </div>
+                <div class="input-box">
+                    <h3>
+                         From City
+                     </h3>
+                     <div class="airportname">
+                         {{ arrivalAirport.city }}
+                     </div> 
+                 </div>
+                 <div class="input-box">
+                    <h3>
+                         In Country
+                     </h3>
+                     <div class="airportname">
+                         {{ arrivalAirport.country }}
+                     </div> 
+                 </div>
+                 <div class="input-box">
+                    <h3>
+                         Return date
+                     </h3>
+                     <input type="date" [value]="arrivalDate" >
+                 </div>
+                 <div class="input-box">
+                    <h3>
+                         Price
+                     </h3>
+                     <input type="number" >
+                 </div>
+                 <button (click)="registerTravel()" class="btn-new">Register</button>
+            </div>
+        </div>
+    </div>
+
+
 </div>

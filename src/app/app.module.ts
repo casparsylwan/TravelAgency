@@ -11,12 +11,14 @@ import { NavbarComponent } from './base/navbar/navbar.component';
 import { LoginModule } from './login/login.module';
 import { OffersModule } from './offers/offers.module';
 import { StateService } from './shared/state.service';
+// import { LoaderComponent } from './base/loader/loader.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    // LoaderComponent
   ],
   imports: [
     BrowserModule,
