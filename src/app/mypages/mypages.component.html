@@ -1,30 +1,31 @@
 <div class="admin-pages">
     <div class="sidebar">
-        <h2 class="adminboard">Admin board</h2>
+        <h2 *ngIf="customer$.roles == 'ADMIN'" class="adminboard">Admin board</h2>
+        <h2 *ngIf="customer$.roles == 'CUSTOMER'" class="adminboard"> Welcome {{ customer$.firstName }}</h2>
             <ul>
-                <li class="nav-view">
-                    <a href="">
+                <li *ngIf="customer$.roles == 'ADMIN'" class="nav-view">
+                    <a>
                         Create trip              
                     </a>
                 </li>
-                <li class="nav-view">
-                    <a href="">
+                <li *ngIf="customer$.roles == 'ADMIN'" class="nav-view">
+                    <a>
                         Customers
                     </a>
                 </li>
-                <li class="nav-view">
-                    <a href="">
+                <li *ngIf="customer$.roles == 'ADMIN'" class="nav-view">
+                    <a >
                         View travelorders
                     </a>
                 </li>
-                <li class="nav-view">
-                    <a href="">
-                        d
+                <li *ngIf="customer$.roles == 'CUSTOMER'" class="nav-view">
+                    <a [routerLink]="['/booking/date']" >
+                        Buy a flight 
                     </a>
                 </li>
-                <li class="nav-view">
-                    <a href="">
-                        e
+                <li *ngIf="customer$.roles == 'CUSTOMER'" class="nav-view">
+                    <a [routerLink]="['/mypage/orders']">
+                        My orders
                     </a>
                 </li>
             </ul>
@@ -33,7 +34,8 @@
     <section class="heading">
         <h2>{{ headingsAdmin }}</h2>
         <h3>Setup destinations</h3>
-    <app-setup-destination></app-setup-destination>    
+    <app-setup-destination *ngIf="customer$.roles == 'ADMIN'"></app-setup-destination>
+    <app-mypage-offer></app-mypage-offer>   
     </section>
     
 

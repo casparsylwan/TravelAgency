@@ -5,10 +5,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MypagesRoutingModule } from './mypages-routing.module';
 import { MypagesComponent } from './mypages.component';
 import { SetupDestinationComponent } from './setup-destination/setup-destination.component';
+import { MypageOfferComponent } from './mypage-offer/mypage-offer.component';
 
 
 @NgModule({
-  declarations: [MypagesComponent, SetupDestinationComponent],
+  declarations: [MypagesComponent, SetupDestinationComponent, MypageOfferComponent],
   imports: [
     CommonModule,
     MypagesRoutingModule,

@@ -27,6 +27,7 @@ export class StateService {
      customerTemp.firstName = customer.firstName;
      customerTemp.lastName = customer.lastName;
      customerTemp.email = customer.email;
+     customerTemp.roles = customer.roles;
      
      this.customer.next(customerTemp);
     // this.session.setCustomerInSessionStorage(customerTemp);

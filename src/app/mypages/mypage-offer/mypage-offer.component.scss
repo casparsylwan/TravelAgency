@@ -1,0 +1,54 @@
+table{ 
+
+ 
+    background:white;
+    border-radius:6px;
+    width:100%;
+    
+   
+    
+    td,th{
+        padding: 0.5rem 1rem 1rem 1rem;
+        }
+  
+    thead tr{
+
+      height: 3rem;
+      background:#00e;
+      color:#fff;
+      font-size:1.2rem;
+      font-weight: lighter;
+      text-align: center;
+
+      
+    }
+
+    thead tr:nth-child(1) th
+    {
+        
+        border-left: 1px solid #000;
+
+    }
+
+    thead tr:nth-child(2) th:nth-child(3n)
+    {
+        
+        border-right: 1px solid #000;
+
+    }
+    
+    tbody tr{
+         height:48px; 
+         border-bottom:1px solid #E3F1D5;
+
+         &:hover
+         {
+            background: #bbb;
+         }
+
+      &:last-child {
+           border:0; 
+        }
+    }
+    
+  }
