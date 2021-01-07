@@ -19,15 +19,17 @@
     </thead>
     <tbody>
         <tr *ngFor="let deal of offers" ><!-- *ngFor="let airport of airports$" -->
-            <td>{{ deal.fromAirport.name }}</td>
-            <td>{{ deal.fromAirport.country }}</td>
-            <td> {{ deal.fromAirport.city }}</td>
-            <td>{{ deal.toAirport.name }}</td>
-            <td>{{ deal.toAirport.country }}</td>
-            <td> {{ deal.toAirport.city }}</td>
-            <td> {{ createDate(deal.depatureDate) }}</td>
-            <td >{{ deal.price }} kr </td><!-- (click)="setDepartureAirport(airport)" -->
-            <td >Add</td> <!-- (click)="setArrivalAirport(airport)" -->
+            <ng-container *ngIf="deal.fromAirport != null &&  deal.toAirport != null">
+                <td>{{ deal.fromAirport.name }}</td>
+                <td>{{ deal.fromAirport.country }}</td>
+                <td> {{ deal.fromAirport.city }}</td>
+                <td>{{ deal.toAirport.name }}</td>
+                <td>{{ deal.toAirport.country }}</td>
+                <td> {{ deal.toAirport.city }}</td>
+                <td> {{ createDate(deal.depatureDate) }}</td>
+                <td >{{ deal.price }} kr </td><!-- (click)="setDepartureAirport(airport)" -->
+                <td >Add</td> <!-- (click)="setArrivalAirport(airport)" -->
+            </ng-container>
         </tr>
     </tbody>
 </table>

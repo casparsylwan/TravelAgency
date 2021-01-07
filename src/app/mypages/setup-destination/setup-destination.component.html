@@ -84,13 +84,16 @@
                          {{ departureAirport.country }}
                      </div> 
                  </div>
-                 <div class="input-box">
-                    <h3>
-                         Departure date
-                     </h3>
-                     <input type="date" [value]="departureDate">
-                 </div>
-                
+                 <form [formGroup]="airportForm">
+                    <div class="input-box">
+                        <h3>
+                            Departure date
+                        </h3>
+                        <input type="datetime-local" formControlName="departureDate" >
+                        
+                    </div>
+                 </form>
+                {{ airportForm.value.departureDate | json }}
                 
 
 
@@ -120,18 +123,14 @@
                          {{ arrivalAirport.country }}
                      </div> 
                  </div>
-                 <div class="input-box">
-                    <h3>
-                         Return date
-                     </h3>
-                     <input type="date" [value]="arrivalDate" >
-                 </div>
-                 <div class="input-box">
-                    <h3>
-                         Price
-                     </h3>
-                     <input type="number" >
-                 </div>
+                 <form [formGroup]="airportForm">
+                    <div class="input-box">
+                        <h3>
+                            Price {{ airportForm.value.price }}
+                        </h3>
+                        <input type="number" formControlName="price"  >
+                    </div>
+                </form>
                  <button (click)="registerTravel()" class="btn-new">Register</button>
             </div>
         </div>

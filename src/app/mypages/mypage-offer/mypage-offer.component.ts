@@ -64,10 +64,14 @@ export class MypageOfferComponent implements OnInit {
     this.router.navigate(['/login'])
   }
 
-  createDate(date:Date)
+  createDate(date:Date | null)
   {
+    if(date==null)
+    {
+      return null
+    }
     let timeObj = new Date(date)
-    let time = timeObj.getFullYear() +'-'+ this.pad((timeObj.getMonth() +1 ),2) + '-' + timeObj.getDate() + ' ' + timeObj.getHours()+":"+timeObj.getMinutes()
+    let time = timeObj.getFullYear() +'-'+ this.pad((timeObj.getMonth() +1 ),2) + '-' + this.pad(timeObj.getDate(),2)  + ' ' + timeObj.getHours()+":"+ this.pad(timeObj.getMinutes(),2) 
     return time;
   }
 
@@ -77,6 +81,6 @@ export class MypageOfferComponent implements OnInit {
     let snl = sn.length
     if(snl >= l) return sn
     return '0'.repeat(l - snl) + sn
-}
+  }
 
 }

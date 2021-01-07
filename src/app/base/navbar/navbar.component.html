@@ -5,7 +5,7 @@
         </a>
     </div>
     <div class="navbox">
-        <a *ngIf="loggedIn()" [routerLink]="['/mypages']" class="login boka">
+        <a *ngIf="loggedIn() && customer$ !=null" [routerLink]="['/mypages']" class="login boka">
             {{ customer$.firstName }}s page 
         </a>
         <a [routerLink]="['/booking/date']" class="login boka">

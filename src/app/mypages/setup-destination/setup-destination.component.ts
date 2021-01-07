@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder} from '@angular/forms';
+import { Router } from '@angular/router';
 import { Airport } from 'src/app/models/airport';
 import { Customer } from 'src/app/models/Customer';
 import { TravelService } from 'src/app/service/travel.service';
@@ -21,16 +22,21 @@ export class SetupDestinationComponent implements OnInit {
 
   departureDate:number = Date.now();
   arrivalDate:number = Date.now()
+  price:number = 0;
 
   constructor(private fb:FormBuilder,
               private travelService:TravelService,
-              private state:StateService) { }
+              private state:StateService,
+              private router:Router
+              ) { }
 
   airportForm = this.fb.group({
 
     airportName: [''],
     country: [''],
-    city: ['']
+    city: [''],
+    price:[0],
+    departureDate:["2021-01-17T20:00"]
 
   })
 
@@ -82,13 +88,32 @@ export class SetupDestinationComponent implements OnInit {
 
   registerTravel()
   {
+  //  let timeMilliseconds = new Date().getTime() Math.floor(timeMilliseconds/1000)
+
     let body:any = { fromAirport: this.departureAirport,
                      toAirport: this.arrivalAirport,
-                     depatureDate: this.departureDate,
-                     returnDate: this.arrivalDate
+                     depatureDate: this.airportForm.value.departureDate, //,
+                     price: this.airportForm.value.price
                     }
     console.log(body);
+    if(this.customer$ != null)
+    {
+       this.travelService.createTravelOffer(body, this.customer$.jwt).subscribe((offer) => console.log(offer));
+    }
+    else
+    {
+      this.logout();
+    }
+    
 
+  }
+
+  logout()
+  {
+    const customer:Customer = new Customer('');
+    this.state.setCustomer(customer);
+    sessionStorage.removeItem('travelux')
+    this.router.navigate(['/login'])
   }
 
 

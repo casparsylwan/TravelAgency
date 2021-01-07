@@ -49,6 +49,16 @@ export class TravelService implements OnInit{
     return this.http.get<Offer[]>(`${this.baseUrl}/travel/all`, {headers: httpHeaders})
   }
 
+  public createTravelOffer(body:Offer, jwt:string):Observable<Offer>
+  {
+    const httpHeaders = new HttpHeaders({
+      'content-type' : 'application/json',
+      'Authorization': 'Bearer '+ jwt
+    });
+
+      return this.http.post<Offer>(`${this.baseUrl}/travel/new`,body , {headers: httpHeaders})
+  }
+
 
 
 
