@@ -38,7 +38,7 @@ export class CustomersAdminComponent implements OnInit {
     {
       this.loginAuth.httpGetAllCustomers(this.customer$.jwt).subscribe((customers) =>{
         this.customers = customers;
-        console.log(customers)
+        
       },
         (error) =>{
            console.log(error.status) 
