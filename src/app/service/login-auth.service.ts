@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class LoginAuthService implements OnInit{
 
-  baseUrl:string = "https://travelagencyspringboot.herokuapp.com/api/v1";
+ private baseUrl:string = "https://travelagencyspringboot.herokuapp.com/api/v1";
   
 
   constructor(
@@ -59,5 +59,15 @@ export class LoginAuthService implements OnInit{
     });
 
     return this.http.get<Customer>(`${this.baseUrl}/customer/${email}`, {headers: httpHeaders})
+  }
+
+  httpGetAllCustomers(jwt:string):Observable<Customer[]>
+  {
+    const httpHeaders = new HttpHeaders({
+      'content-type' : 'application/json',
+      'Authorization': 'Bearer '+ jwt
+    });
+
+    return this.http.get<Customer[]>("https://travelagencyspringboot.herokuapp.com/api/v1/customers/all", {headers: httpHeaders}) //`${this.baseUrl}/customers/all`
   }
 }

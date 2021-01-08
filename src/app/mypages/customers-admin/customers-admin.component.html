@@ -1,0 +1,27 @@
+<table>
+    <thead>
+        <tr>
+          <th>First name</th>
+          <th>Surname</th>
+          <th>E-mail</th>
+          <th>Password</th>
+          <th>Roles</th>
+          <th>Number of orders</th>
+          <th>Show</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let customer of customers" ><!-- *ngFor="let airport of airports$"  *ngFor="let deal of offers" -->
+            <ng-container ><!--*ngIf="deal.fromAirport != null &&  deal.toAirport != null"-->
+                <td>{{ customer.firstName}}</td>
+                <td>{{ customer.lastName }}</td>
+                <td> {{ customer.email }}</td>
+                <td> {{ customer.password }}</td>
+                <td> {{ customer.roles }}</td>
+                <td>{{ customer.orders.length }}</td>
+                <td >Open</td> 
+            </ng-container>
+        </tr>
+    </tbody>
+</table>
+

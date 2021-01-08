@@ -6,10 +6,12 @@ import { MypagesRoutingModule } from './mypages-routing.module';
 import { MypagesComponent } from './mypages.component';
 import { SetupDestinationComponent } from './setup-destination/setup-destination.component';
 import { MypageOfferComponent } from './mypage-offer/mypage-offer.component';
+import { CustomersAdminComponent } from './customers-admin/customers-admin.component';
+import { MyOrdersComponent } from './my-orders/my-orders.component';
 
 
 @NgModule({
-  declarations: [MypagesComponent, SetupDestinationComponent, MypageOfferComponent],
+  declarations: [MypagesComponent, SetupDestinationComponent, MypageOfferComponent, CustomersAdminComponent, MyOrdersComponent],
   imports: [
     CommonModule,
     MypagesRoutingModule,

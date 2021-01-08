@@ -4,27 +4,27 @@
         <h2 *ngIf="customer$ != null && customer$.roles == 'CUSTOMER'" class="adminboard"> Welcome {{ customer$.firstName }}</h2>
             <ul>
                 <li *ngIf="customer$ != null && customer$.roles == 'ADMIN'" class="nav-view">
-                    <a>
-                        Create trip              
+                    <a [routerLink]="['/mypages/newoffer']" >
+                        Create an offer              
                     </a>
                 </li>
                 <li *ngIf="customer$ != null && customer$.roles == 'ADMIN'" class="nav-view">
-                    <a>
+                    <a [routerLink]="['/mypages/customer']">
                         Customers
                     </a>
                 </li>
                 <li *ngIf="customer$ != null && customer$.roles == 'ADMIN'" class="nav-view">
-                    <a >
+                    <a [routerLink]="['/mypages/orders']">
                         View travelorders
                     </a>
                 </li>
                 <li *ngIf="customer$ != null && customer$.roles == 'CUSTOMER'" class="nav-view">
-                    <a [routerLink]="['/booking/date']" >
+                    <a [routerLink]="['/mypages/orders']" >
                         Buy a flight 
                     </a>
                 </li>
                 <li *ngIf="customer$ != null && customer$.roles == 'CUSTOMER'" class="nav-view">
-                    <a [routerLink]="['/mypage/orders']">
+                    <a [routerLink]="['/mypages/myorders']">
                         My orders
                     </a>
                 </li>
@@ -34,8 +34,9 @@
     <section class="heading">
         <h2>{{ headingsAdmin }}</h2>
         <h3>Setup destinations</h3>
-    <app-setup-destination *ngIf="customer$ != null && customer$.roles == 'ADMIN'"></app-setup-destination>
-    <app-mypage-offer *ngIf="customer$ != null && customer$.roles == 'CUSTOMER'" ></app-mypage-offer>   
+        <router-outlet ></router-outlet>
+    <!-- <app-setup-destination *ngIf="customer$ != null && customer$.roles == 'ADMIN'"></app-setup-destination>
+    <app-mypage-offer *ngIf="customer$ != null && customer$.roles == 'CUSTOMER'" ></app-mypage-offer>    -->
     </section>
     
 

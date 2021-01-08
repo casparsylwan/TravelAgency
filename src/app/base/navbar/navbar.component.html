@@ -6,7 +6,7 @@
     </div>
     <div class="navbox">
         <a *ngIf="loggedIn() && customer$ !=null" [routerLink]="['/mypages']" class="login boka">
-            {{ customer$.firstName }}s page 
+        {{ customer$.firstName }}&#39;s page 
         </a>
         <a [routerLink]="['/booking/date']" class="login boka">
             Booking

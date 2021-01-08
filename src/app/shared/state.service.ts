@@ -28,9 +28,10 @@ export class StateService {
      customerTemp.lastName = customer.lastName;
      customerTemp.email = customer.email;
      customerTemp.roles = customer.roles;
-     
+     customerTemp.orders = customer.orders
+
      this.customer.next(customerTemp);
-    // this.session.setCustomerInSessionStorage(customerTemp);
+    
   }
 
   addAirport(airport:Airport)
