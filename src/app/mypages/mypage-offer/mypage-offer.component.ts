@@ -83,4 +83,26 @@ export class MypageOfferComponent implements OnInit {
     return '0'.repeat(l - snl) + sn
   }
 
+  delteOffer(offer:Offer):void
+  {
+    if(this.customer$?.jwt && offer?.id != null)
+    {
+      this.travelService.deleteTravelOffer(offer,this.customer$.jwt, offer.id).subscribe(()=>{
+        this.offers = [];
+        this.getOffers();
+      },
+      (err) =>{
+        console.log(err);
+      })
+      
+      
+    }
+  }
+
+  buyTravel(deal:Offer)
+  {
+    this.customer$?.orders.push(deal);
+    console.log(this.customer$)
+  }
+
 }

@@ -59,6 +59,16 @@ export class TravelService implements OnInit{
       return this.http.post<Offer>(`${this.baseUrl}/travel/new`,body , {headers: httpHeaders})
   }
 
+  public deleteTravelOffer(body:Offer, jwt:string, id:number):Observable<void>
+  {
+    const httpHeaders = new HttpHeaders({
+      'content-type' : 'application/json',
+      'Authorization': 'Bearer '+ jwt
+    });
+
+      return this.http.post<void>(`${this.baseUrl}/travel/delete/${id}`, JSON.stringify(body)  , {headers: httpHeaders})
+  }
+
 
 
 

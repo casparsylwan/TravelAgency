@@ -2,6 +2,7 @@ import { Airport } from "./airport";
 
 export interface Offer 
 {
+    id:number | null;
     fromAirport:Airport | null;
     toAirport:Airport | null;
     price:number | null;
@@ -10,6 +11,7 @@ export interface Offer
 
 export class OfferClass implements Offer{
 
+    id:number | null = null;
     fromAirport: Airport | null = null;
     toAirport: Airport | null = null;
     price: number | null = null;

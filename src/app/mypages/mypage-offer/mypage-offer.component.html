@@ -14,7 +14,7 @@
           <th>City</th>
           <th>Date</th>
           <th>price</th>
-          <th *ngIf="customer$ != null && customer$.role == 'CUSTOMER'" >Buy</th>
+          <th *ngIf="customer$ != null && customer$.roles == 'CUSTOMER'" >Buy</th>
           <th *ngIf="customer$ != null && customer$.roles == 'ADMIN'" >Remove</th>
         </tr>
     </thead>
@@ -29,8 +29,8 @@
                 <td> {{ deal.toAirport.city }}</td>
                 <td> {{ createDate(deal.depatureDate) }}</td>
                 <td >{{ deal.price }} kr </td>
-                <td *ngIf="customer$ != null && customer$.role == 'CUSTOMER'">Add</td>
-                <td class="remove" *ngIf="customer$ != null && customer$.roles == 'ADMIN'" ></td>
+                <td (click)="buyTravel(deal)" *ngIf="customer$ != null && customer$.roles == 'CUSTOMER'">Add</td>
+                <td (click)="delteOffer(deal)" class="remove" *ngIf="customer$ != null && customer$.roles == 'ADMIN'" ></td>
             </ng-container>
         </tr>
     </tbody>
