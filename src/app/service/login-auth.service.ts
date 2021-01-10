@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Authentication } from '../models/Authentication';
 import { Observable, throwError } from 'rxjs';
 import { StateService } from '../shared/state.service';
-import { Customer } from '../models/Customer';
+import { Customer, CustomerAdminView } from '../models/Customer';
 import { Router } from '@angular/router';
 
 
@@ -45,6 +45,16 @@ export class LoginAuthService implements OnInit{
     })
   }
 
+  updateCustomer(body:any, jwt:string):Observable<Customer>
+  {
+    const httpHeaders = new HttpHeaders({
+      'content-type' : 'application/json',
+      'Authorization': 'Bearer '+ jwt
+    });
+    console.log("Body", body);
+    return this.http.post<Customer>(`${this.baseUrl}/customer/update`, body, {headers: httpHeaders})
+  }
+
   httpCreateCustomer(body:any):Observable<Customer>
   {
     return this.http.post<Customer>(`${this.baseUrl}/customer/new`, body);
@@ -61,13 +71,13 @@ export class LoginAuthService implements OnInit{
     return this.http.get<Customer>(`${this.baseUrl}/customer/${email}`, {headers: httpHeaders})
   }
 
-  httpGetAllCustomers(jwt:string):Observable<Customer[]>
+  httpGetAllCustomers(jwt:string):Observable<CustomerAdminView[]>
   {
     const httpHeaders = new HttpHeaders({
       'content-type' : 'application/json',
       'Authorization': 'Bearer '+ jwt
     });
 
-    return this.http.get<Customer[]>("https://travelagencyspringboot.herokuapp.com/api/v1/customers/all", {headers: httpHeaders}) //`${this.baseUrl}/customers/all`
+    return this.http.get<CustomerAdminView[]>("https://travelagencyspringboot.herokuapp.com/api/v1/customers/all", {headers: httpHeaders}) //`${this.baseUrl}/customers/all`
   }
 }

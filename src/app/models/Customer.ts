@@ -17,3 +17,8 @@ export class Customer{
     constructor(jwt:string){}
 
 }
+
+export class CustomerAdminView extends Customer{
+
+    password:string | null = '1234';
+}

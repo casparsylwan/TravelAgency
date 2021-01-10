@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Customer } from 'src/app/models/Customer';
+import { Customer, CustomerAdminView } from 'src/app/models/Customer';
 import { LoginAuthService } from 'src/app/service/login-auth.service';
 import { StateService } from 'src/app/shared/state.service';
 
@@ -11,7 +11,7 @@ import { StateService } from 'src/app/shared/state.service';
 export class CustomersAdminComponent implements OnInit {
 
   customer$:Customer | null = null;
-  customers:Customer[] = [];
+  customers:CustomerAdminView[] = [];
   getAllBoolean:boolean = false;
 
   constructor(

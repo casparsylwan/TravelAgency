@@ -63,7 +63,9 @@ export class RegisterComponent implements OnInit {
       this.httpLogin.httpLogin(authBody).subscribe((jwtBody) =>{
         customer.jwt = jwtBody.jwt
         this.state.setCustomer(customer);
+        sessionStorage.setItem('travelux', JSON.stringify(this.customer$))
         this.router.navigate(['/mypages'])
+        
       })
     })
   } 

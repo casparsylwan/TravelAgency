@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Customer } from 'src/app/models/Customer';
 import { Offer, OfferClass } from 'src/app/models/offer';
+import { LoginAuthService } from 'src/app/service/login-auth.service';
 import { TravelService } from 'src/app/service/travel.service';
 import { StateService } from 'src/app/shared/state.service';
 
@@ -18,6 +19,7 @@ export class MypageOfferComponent implements OnInit {
 
   constructor(
     private travelService:TravelService,
+    private loginCustomerService:LoginAuthService,
     private state:StateService,
     private router:Router
     ) { }
@@ -41,6 +43,7 @@ export class MypageOfferComponent implements OnInit {
     if(this.customer$?.jwt)
     {
       this.travelService.getAllTravelOffers(this.customer$.jwt).subscribe((offer) => {
+        console.log(offer);
         this.offers = [...this.offers, ...offer]
 
       console.log(this.offers);
@@ -101,8 +104,21 @@ export class MypageOfferComponent implements OnInit {
 
   buyTravel(deal:Offer)
   {
-    this.customer$?.orders.push(deal);
-    console.log(this.customer$)
+    if(this.customer$?.orders == null && this.customer$ != null)
+    {
+      this.customer$.orders = []
+    }
+
+    if(this.customer$?.jwt != null)
+    {
+      this.customer$?.orders.push(deal);
+      this.loginCustomerService.updateCustomer(this.customer$, this.customer$?.jwt).subscribe((customer)=>{
+        console.log('CUSTOMER$', customer);
+      })
+      
+    }
+    
+    
   }
 
 }
