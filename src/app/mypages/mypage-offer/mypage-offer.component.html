@@ -3,7 +3,7 @@
         <tr>
             <th colspan="3">Travling from</th>
             <th colspan="3">Travling to</th>
-            <th colspan="3">Your price</th>
+            <th colspan="4">Your price</th>
         </tr>
         <tr>
           <th>Airport</th>
@@ -14,6 +14,7 @@
           <th>City</th>
           <th>Date</th>
           <th>price</th>
+          <th *ngIf="customer$ != null && customer$.roles == 'CUSTOMER'" >seat</th>
           <th *ngIf="customer$ != null && customer$.roles == 'CUSTOMER'" >Buy</th>
           <th *ngIf="customer$ != null && customer$.roles == 'ADMIN'" >Remove</th>
         </tr>
@@ -29,10 +30,16 @@
                 <td> {{ deal.toAirport.city }}</td>
                 <td> {{ createDate(deal.depatureDate) }}</td>
                 <td >{{ deal.price }} kr </td>
+                <td (click)="buyTravel(deal)" *ngIf="customer$ != null && customer$.roles == 'CUSTOMER'">
+                    <input type="number">
+                </td>
                 <td (click)="buyTravel(deal)" *ngIf="customer$ != null && customer$.roles == 'CUSTOMER'">Add</td>
                 <td (click)="delteOffer(deal)" class="remove" *ngIf="customer$ != null && customer$.roles == 'ADMIN'" ></td>
             </ng-container>
         </tr>
     </tbody>
 </table>
+
+
+
 
