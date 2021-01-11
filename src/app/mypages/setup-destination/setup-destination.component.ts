@@ -54,7 +54,7 @@ export class SetupDestinationComponent implements OnInit {
     this.state.customer$.subscribe((customer) => {
       
       this.customer$ = customer 
-      if(!this.planesRecieved)
+      if(!this.planesRecieved && this.customer$?.jwt.length>5)
       {
         this.getAllPlanes();
       }
