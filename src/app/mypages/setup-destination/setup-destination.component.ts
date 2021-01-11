@@ -24,6 +24,8 @@ export class SetupDestinationComponent implements OnInit {
 
   arrivalAirport:Airport =    {name:'', country:'', city:''};
 
+  thePlaneOfchoice:Plane = {name:'', numberOfSeats: 0 };
+
   departureDate:number = Date.now();
   arrivalDate:number = Date.now()
   price:number = 0;
@@ -130,6 +132,24 @@ export class SetupDestinationComponent implements OnInit {
     this.arrivalAirport = airportTo
   }
 
+  setAirplaneOfChoice(plane:Plane)
+  {
+    this.thePlaneOfchoice = plane;
+  }
+
+  setPlaneText()
+  {
+    if(this.thePlaneOfchoice.numberOfSeats >0)
+    {
+      return this.thePlaneOfchoice.name + ", " +this.thePlaneOfchoice.numberOfSeats + " seats"
+    }
+    else
+    {
+      return '';
+    }
+     
+  }
+
   resetTravelAirports()
   {
     this.departureAirport = {name:'', country:'', city:''};
@@ -140,7 +160,9 @@ export class SetupDestinationComponent implements OnInit {
   {
   //  let timeMilliseconds = new Date().getTime() Math.floor(timeMilliseconds/1000)
 
-    let body:any = { fromAirport: this.departureAirport,
+    let body:any = { 
+                     plane: this.thePlaneOfchoice,
+                     fromAirport: this.departureAirport,
                      toAirport: this.arrivalAirport,
                      depatureDate: this.airportForm.value.departureDate, //,
                      price: this.airportForm.value.price

@@ -63,7 +63,7 @@
             <thead>
                 <tr>
                   <th>Plane</th>
-                  <th>max number of passager</th>
+                  <th>max number of passanger</th>
                   <th>add</th>
                 </tr>
             </thead>
@@ -71,7 +71,7 @@
                 <tr *ngFor="let plane of planes$">
                     <td>{{ plane.name }}</td>
                     <td>{{ plane.numberOfSeats }}</td>
-                    <td> add</td>
+                    <td (click)="setAirplaneOfChoice(plane)" > add</td>
                 </tr>
             </tbody>
         </table>
@@ -155,6 +155,14 @@
                      </h3>
                      <div class="airportname">
                          {{ arrivalAirport.country }}
+                     </div> 
+                 </div>
+                 <div class="input-box">
+                    <h3>
+                         Plane type
+                     </h3>
+                     <div class="airportname">
+                        {{ setPlaneText() }}
                      </div> 
                  </div>
                  <form [formGroup]="airportForm">
