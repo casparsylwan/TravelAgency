@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Airport } from '../models/airport';
 import { Customer } from '../models/Customer';
 import { Offer } from '../models/offer';
+import { Plane } from '../models/plane';
 import { StateService } from '../shared/state.service';
 
 @Injectable({
@@ -38,6 +39,28 @@ export class TravelService implements OnInit{
     });
 
     return this.http.post<Airport>(`${this.baseUrl}/airport/new`, body, {headers: httpHeaders})
+  }
+
+  getAllPlanes(jwt:string):Observable<Plane[]>
+  {
+
+    const httpHeaders = new HttpHeaders({
+      'content-type' : 'application/json',
+      'Authorization': 'Bearer '+ jwt
+    });
+
+    return this.http.get<Plane[]>(`${this.baseUrl}/airplanes/all`, {headers: httpHeaders})
+  }
+
+  createAirplane(body ,jwt:string):Observable<Plane>
+  {
+    const httpHeaders = new HttpHeaders({
+      'content-type' : 'application/json',
+      'Authorization': 'Bearer '+ jwt
+    });
+
+    return this.http.post<Plane>(`${this.baseUrl}/airplane/new`, body, {headers: httpHeaders})
+
   }
 
   public getAllTravelOffers(jwt:string):Observable<Offer[]>

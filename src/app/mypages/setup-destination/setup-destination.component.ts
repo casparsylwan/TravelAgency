@@ -3,6 +3,7 @@ import { FormBuilder} from '@angular/forms';
 import { Router } from '@angular/router';
 import { Airport } from 'src/app/models/airport';
 import { Customer } from 'src/app/models/Customer';
+import { Plane } from 'src/app/models/plane';
 import { TravelService } from 'src/app/service/travel.service';
 import { StateService } from 'src/app/shared/state.service';
 
@@ -15,6 +16,9 @@ export class SetupDestinationComponent implements OnInit {
 
   customer$:Customer | null = null;
   airports$:Airport[] = [];
+  planes$:Plane[] = [];
+
+  planesRecieved:boolean = false;
 
   departureAirport:Airport = {name:'', country:'', city:''};
 
@@ -40,10 +44,56 @@ export class SetupDestinationComponent implements OnInit {
 
   })
 
+  planeForm = this.fb.group({
+    name:[''],
+    numberOfSeats: [300]
+  })
+
   ngOnInit(): void 
   {
-    this.state.customer$.subscribe((customer) => this.customer$ = customer );
+    this.state.customer$.subscribe((customer) => {
+      
+      this.customer$ = customer 
+      if(!this.planesRecieved)
+      {
+        this.getAllPlanes();
+      }
+      
+    });
     this.state.airports$.subscribe((airports) => this.airports$ = airports);
+    this.state.airPlanes$.subscribe((plane) => this.planes$ = plane);
+
+    
+  }
+
+  public createPlane()
+  {
+    if(this.customer$ != undefined)
+    {
+      const body = {
+        name: this.planeForm.value.name,
+        numberOfSeats: this.planeForm.value.numberOfSeats
+      }
+      console.log(body);
+      this.travelService.createAirplane(body, this.customer$.jwt).subscribe((plane) => {
+
+        this.state.addPlane(plane);
+
+      })
+    }
+
+  }
+
+  public getAllPlanes()
+  {
+    if(this.customer$ != undefined)
+    {
+      this.travelService.getAllPlanes(this.customer$.jwt).subscribe((planes) => {
+
+        this.state.addPlanes(planes);
+        this.planesRecieved = true;
+      })
+    }
   }
 
   public createAirport()

@@ -18,6 +18,22 @@
         <button (click)="createAirport()" class="btn-new">SEND</button>
         <!-- {{ airportForm.value |json }} -->
         <!-- {{ customer$ | json }} -->
+        <h3 class="travel-h3">Register a plane</h3>
+        <form [formGroup]="planeForm">
+            <div class="input-box">
+                <label for="name">Airport Name</label>
+                <input id="name" name="name" type="text" formControlName="name" placeholder="Airport">
+            </div>
+            <div class="input-box">
+                <label for="country">Passanger seats</label>
+                <input id="country" name="country" type="number" formControlName="numberOfSeats" placeholder="country">
+            </div>
+        </form>
+        <button (click)="createPlane()" class="btn-new">SEND</button>
+
+
+
+
     </div>
     <div class="box-destinations">
 
@@ -42,6 +58,24 @@
             </tbody>
         </table>
         <!-- <blockquote> Airports </blockquote> -->
+
+        <table class="plane-table">
+            <thead>
+                <tr>
+                  <th>Plane</th>
+                  <th>max number of passager</th>
+                  <th>add</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let plane of planes$">
+                    <td>{{ plane.name }}</td>
+                    <td>{{ plane.numberOfSeats }}</td>
+                    <td> add</td>
+                </tr>
+            </tbody>
+        </table>
+
         
     </div>
     <!--Create trip-->
