@@ -52,7 +52,7 @@ export class TravelService implements OnInit{
     return this.http.get<Plane[]>(`${this.baseUrl}/airplanes/all`, {headers: httpHeaders})
   }
 
-  createAirplane(body ,jwt:string):Observable<Plane>
+  createAirplane(body:Plane ,jwt:string):Observable<Plane>
   {
     const httpHeaders = new HttpHeaders({
       'content-type' : 'application/json',
