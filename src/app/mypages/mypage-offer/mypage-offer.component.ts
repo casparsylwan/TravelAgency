@@ -112,7 +112,7 @@ export class MypageOfferComponent implements OnInit {
     if(this.customer$?.jwt != null)
     {
       this.customer$?.orders.push(deal);
-      this.loginCustomerService.updateCustomer(this.customer$, this.customer$?.jwt).subscribe((customer)=>{
+      this.travelService.buyTravelSeat(this.customer$, this.customer$?.jwt).subscribe((customer)=>{
         console.log('CUSTOMER$', customer);
       })
       
