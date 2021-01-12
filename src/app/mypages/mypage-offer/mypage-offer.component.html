@@ -30,7 +30,7 @@
                 <td> {{ deal.toAirport.city }}</td>
                 <td> {{ createDate(deal.depatureDate) }}</td>
                 <td >{{ deal.price }} kr </td>
-                <td *ngIf="customer$ != null && customer$.roles == 'CUSTOMER'"> {{ deal.plane?.numberOfSeats | json }} </td>
+                <td *ngIf="customer$ != null && customer$.roles == 'CUSTOMER'"> {{ deal.plane?.numberOfSeats }} </td>
                 <td (click)="addTravelToList( deal )" *ngIf="customer$ != null && customer$.roles == 'CUSTOMER'">Add</td>
                 <td (click)="delteOffer(deal)" class="remove" *ngIf="customer$ != null && customer$.roles == 'ADMIN'" ></td>
             </ng-container>
