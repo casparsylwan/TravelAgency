@@ -14,7 +14,7 @@
           <th>City</th>
           <th>Date</th>
           <th>price</th>
-          <th *ngIf="customer$ != null && customer$.roles == 'CUSTOMER'" >seat</th>
+          <th *ngIf="customer$ != null && customer$.roles == 'CUSTOMER'" >seat's</th>
           <th *ngIf="customer$ != null && customer$.roles == 'CUSTOMER'" >Buy</th>
           <th *ngIf="customer$ != null && customer$.roles == 'ADMIN'" >Remove</th>
         </tr>
@@ -30,16 +30,28 @@
                 <td> {{ deal.toAirport.city }}</td>
                 <td> {{ createDate(deal.depatureDate) }}</td>
                 <td >{{ deal.price }} kr </td>
-                <td (click)="buyTravel(deal)" *ngIf="customer$ != null && customer$.roles == 'CUSTOMER'">
-                    <input type="number">
-                </td>
-                <td (click)="buyTravel(deal)" *ngIf="customer$ != null && customer$.roles == 'CUSTOMER'">Add</td>
+                <td *ngIf="customer$ != null && customer$.roles == 'CUSTOMER'"> {{ deal.plane?.numberOfSeats | json }} </td>
+                <td (click)="addTravelToList( deal )" *ngIf="customer$ != null && customer$.roles == 'CUSTOMER'">Add</td>
                 <td (click)="delteOffer(deal)" class="remove" *ngIf="customer$ != null && customer$.roles == 'ADMIN'" ></td>
             </ng-container>
         </tr>
     </tbody>
 </table>
-
+<div *ngIf="travelToBuy != null"  class="create-seat">
+    <h3>Where do you want to site when travling from </h3>
+    <div class="from">
+        {{ travelToBuy?.fromAirport?.name }}
+    </div>
+    <h3> to </h3>
+    <div class="to">
+        {{ travelToBuy?.toAirport?.name }}
+    </div>
+    <h3 class="choose-seat"> seat number: </h3>
+        <form [formGroup]="seatForm" > 
+            <input type="number" formControlName="seatNumber" >
+        </form>
+    <button (click)="buyTravel(travelToBuy)" class="btn-sign-in" >add to order</button>
+</div>
 
 
 

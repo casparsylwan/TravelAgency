@@ -93,14 +93,14 @@ export class TravelService implements OnInit{
   }
 
 
-  public buyTravelSeat(body:any, jwt:string):Observable<Customer>
+  public buyTravelSeat(body:any, jwt:string, travelId:number):Observable<Customer>
   {
     const httpHeaders = new HttpHeaders({
       'content-type' : 'application/json',
       'Authorization': 'Bearer '+ jwt
     });
-
-    return this.http.post<Customer>(`${this.baseUrl}/customer/update`, body, {headers: httpHeaders})
+    console.log(body);
+    return this.http.post<Customer>(`${this.baseUrl}/seat/new/${travelId}`, body, {headers: httpHeaders})
 
   }
 

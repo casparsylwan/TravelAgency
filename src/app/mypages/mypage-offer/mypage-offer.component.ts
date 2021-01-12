@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Customer } from 'src/app/models/Customer';
 import { Offer, OfferClass } from 'src/app/models/offer';
+import { Seat } from 'src/app/models/seat';
 import { LoginAuthService } from 'src/app/service/login-auth.service';
 import { TravelService } from 'src/app/service/travel.service';
 import { StateService } from 'src/app/shared/state.service';
@@ -16,12 +18,17 @@ export class MypageOfferComponent implements OnInit {
   customer$:Customer | null = null;
   offers:Offer[] = []
   offersCall:boolean = false;
+  travelToBuy:Offer | null = null;
+
+  seatForm = this.fb.group({
+    seatNumber: []
+  })
 
   constructor(
     private travelService:TravelService,
-    private loginCustomerService:LoginAuthService,
     private state:StateService,
-    private router:Router
+    private router:Router,
+    private fb:FormBuilder
     ) { }
 
   ngOnInit(): void {
@@ -102,6 +109,11 @@ export class MypageOfferComponent implements OnInit {
     }
   }
 
+  addTravelToList( travel:Offer )
+  {
+    this.travelToBuy = travel;
+  }
+
   buyTravel(deal:Offer)
   {
     if(this.customer$?.orders == null && this.customer$ != null)
@@ -109,10 +121,15 @@ export class MypageOfferComponent implements OnInit {
       this.customer$.orders = []
     }
 
-    if(this.customer$?.jwt != null)
+    let seat:Seat = new Seat();
+    seat.passanger = this.customer$
+    seat.seatNumber = this.seatForm.value.seatNumber;
+
+    if(this.customer$?.jwt != null && deal != null && deal.id != null)
     {
-      this.customer$?.orders.push(deal);
-      this.travelService.buyTravelSeat(this.customer$, this.customer$?.jwt).subscribe((customer)=>{
+      
+      this.travelService.buyTravelSeat(seat, this.customer$?.jwt, deal?.id).subscribe((customer)=>{
+        this.customer$?.orders.push(deal);
         console.log('CUSTOMER$', customer);
       })
       
