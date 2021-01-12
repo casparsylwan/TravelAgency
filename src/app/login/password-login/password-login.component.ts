@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Authentication } from 'src/app/models/Authentication';
 import { Customer, CustomerAdminView } from 'src/app/models/Customer';
+import { Offer } from 'src/app/models/offer';
 import { LoginAuthService } from 'src/app/service/login-auth.service';
 import { SessionService } from 'src/app/service/session.service';
 import { TravelService } from 'src/app/service/travel.service';
@@ -60,21 +61,40 @@ export class PasswordLoginComponent implements OnInit {
 
           console.log("LoGiN: ", customer);
           customer.jwt = jwt.jwt;
-          let travelOrders:number[] =[];
-          customer.travelOrders.forEach((order) => {
-            if(order?.id != null)
-            {
-              travelOrders.push(order.id)
-            }
-            
-          })
-          this.travelService.getCustomersOffers(travelOrders, jwt.jwt).subscribe((orders) =>{
-    
-            
+          let travelOrders:{id:number, seatNumber:number}[] =  [];
+          let travelDeal:Offer[] = [];
+          
+          this.travelService.getCustomersOrderId(customer.email, customer.jwt).subscribe((customerOrder)=> {
+
+            customerOrder.forEach( product => {
+              travelOrders.push({
+                id: product.id,
+                seatNumber: product.seatNumber
+            })
+            travelDeal.push(product.travel)    
+            });
+            customer.travelOrders = travelDeal
+            customer.orders = travelOrders
             this.state.setCustomer(customer);
             sessionStorage.setItem('travelux', JSON.stringify(this.customer$))
-            this.router.navigate(['/mypages'])
-          })          
+            this.router.navigate(['/mypages/myorders'])
+          })
+
+          // let travelOrders:number[] =[];
+          // customer.travelOrders.forEach((order) => {
+          //   if(order?.id != null)
+          //   {
+          //     travelOrders.push(order.id)
+          //   }
+            
+          // })
+          // this.travelService.getCustomersOffers(travelOrders, jwt.jwt).subscribe((orders) =>{
+    
+            
+          //   this.state.setCustomer(customer);
+          //   sessionStorage.setItem('travelux', JSON.stringify(this.customer$))
+          //   this.router.navigate(['/mypages'])
+          // })          
       })
     })
 

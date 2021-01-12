@@ -79,8 +79,19 @@ export class TravelService implements OnInit{
       'content-type' : 'application/json',
       'Authorization': 'Bearer '+ jwt
     });
-    console.log(this.http.post(`${this.baseUrl}/travel/customer`,travelOrders, {headers: httpHeaders}));
+    
     return this.http.post<Offer[]>(`${this.baseUrl}/travel/customer`,travelOrders , {headers: httpHeaders})
+  }
+
+  public getCustomersOrderId(email:string, jwt:string):Observable<{id:number, seatNumber:number, travel:Offer}[]>
+  {
+
+    const httpHeaders = new HttpHeaders({
+      'content-type' : 'application/json',
+      'Authorization': 'Bearer '+ jwt
+    });
+
+    return this.http.get<{id:number, seatNumber:number, travel:Offer}[]>(`${this.baseUrl}/travel/customerorder/${email}`, {headers: httpHeaders})
   }
 
   public createTravelOffer(body:Offer, jwt:string):Observable<Offer>

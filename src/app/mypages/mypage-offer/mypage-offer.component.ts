@@ -125,12 +125,28 @@ export class MypageOfferComponent implements OnInit {
     seat.passanger = this.customer$
     seat.seatNumber = this.seatForm.value.seatNumber;
 
-    if(this.customer$?.jwt != null && deal != null && deal.id != null)
+    if(this.customer$?.jwt != null && this.customer$?.email != undefined && this.customer$?.jwt != undefined && deal != null && deal.id != null)
     {
-      
+      let jwt = this.customer$.jwt
+      let email = this.customer$.email
+      let travelOrders:{id:number, seatNumber:number}[] =  [];
+      let travelDeal:Offer[] = [];
+
       this.travelService.buyTravelSeat(seat, this.customer$?.jwt, deal?.id).subscribe((customer)=>{
-        this.customer$?.orders.push(deal);
-        console.log('CUSTOMER$', customer);
+        
+        this.travelService.getCustomersOrderId(email, jwt).subscribe((customerOrder)=> {
+          console.log(customerOrder)
+          customerOrder.forEach( product => {
+            travelOrders.push({
+              id: product.id,
+              seatNumber: product.seatNumber
+          })
+          travelDeal.push(product.travel)    
+          });
+          this.customer$.travelOrders = travelDeal
+          this.customer$.orders = travelOrders
+          this.router.navigate(['/mypages/myorders'])
+        })
       })
       
     }
