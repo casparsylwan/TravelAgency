@@ -121,9 +121,18 @@ export class TravelService implements OnInit{
       'content-type' : 'application/json',
       'Authorization': 'Bearer '+ jwt
     });
-    console.log(body);
     return this.http.post<Customer>(`${this.baseUrl}/seat/new/${travelId}`, body, {headers: httpHeaders})
 
+  }
+
+  removeSeatFromCustomerAndTravel(email:string ,travelId:number, seatId:number ,jwt:string):Observable<void>
+  {
+    const httpHeaders = new HttpHeaders({
+      'content-type' : 'application/json',
+      'Authorization': 'Bearer '+ jwt
+    });
+    console.log("DELETE");
+    return this.http.delete<void>(`${this.baseUrl}/delete/seat/${seatId}/${travelId}/${email}`, {headers: httpHeaders})
   }
 
 

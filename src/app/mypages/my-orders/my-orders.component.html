@@ -22,7 +22,7 @@
     </thead>
     <tbody>
         <ng-container *ngIf="customer$ != null" >
-            <tr *ngFor="let deal of customer$.travelOrders; let i = index" ><!-- *ngFor="let airport of airports$" -->
+            <tr *ngFor="let deal of customer$.travelOrders; let i = index" >
                 <ng-container *ngIf="deal.fromAirport != null &&  deal.toAirport != null">
                     <td>{{ deal.fromAirport.name }}</td>
                     <td>{{ deal.fromAirport.country }}</td>
@@ -37,7 +37,7 @@
                         <td [ngClass]="{'not': !deal.paid, 'true': deal.paid } " class="paid"> {{isPaid(deal)}}</td>
                     </ng-container>
                     <td class="remove" *ngIf="customer$ != null && customer$.roles == 'ADMIN'" ></td>
-                    <td (click)="removeDeal(deal, customer$.orders[i].seatNumber)" class="remove" ></td>
+                    <td (click)="removeDeal(deal, customer$.orders[i])" class="remove" ></td>
                 </ng-container>
             </tr>
         </ng-container>    

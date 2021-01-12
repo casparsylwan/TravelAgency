@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from 'src/app/models/Customer';
 import { Offer } from 'src/app/models/offer';
+import { TravelService } from 'src/app/service/travel.service';
 import { StateService } from 'src/app/shared/state.service';
 
 @Component({
@@ -12,7 +13,10 @@ export class MyOrdersComponent implements OnInit {
 
   customer$:Customer | null = null;
 
-  constructor(private state:StateService) { }
+  constructor(
+    private state:StateService,
+    private travelService:TravelService
+    ) { }
 
   ngOnInit(): void {
 
@@ -58,6 +62,34 @@ export class MyOrdersComponent implements OnInit {
   {
     console.log(deal);
     console.log(seat);
+    console.log()
+    if(this.customer$ != null && seat.id != null && deal.id !=null && this.customer$.email !=null && this.customer$.jwt !=null )
+    {
+      let email:string = this.customer$.email;
+      let jwt:string = this.customer$.jwt;
+      let travelOrders:{id:number, seatNumber:number}[] =  [];
+      let travelDeal:Offer[] = [];
+
+        this.travelService.removeSeatFromCustomerAndTravel(this.customer$?.email, deal.id, seat.id, this.customer$.jwt).subscribe(()=>{
+          console.log("SENT");
+          this.travelService.getCustomersOrderId(email, jwt).subscribe((customerOrder)=> {
+            customerOrder.forEach( product => {
+              travelOrders.push({
+                id: product.id,
+                seatNumber: product.seatNumber
+            })
+            travelDeal.push(product.travel)    
+            });
+            this.customer$.travelOrders = travelDeal
+            this.customer$.orders = travelOrders
+            
+          }) 
+        },
+        (err)=> {
+          console.log(err);
+        })
+    }
+    
     
   }
 
