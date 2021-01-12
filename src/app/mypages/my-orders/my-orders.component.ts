@@ -52,5 +52,14 @@ export class MyOrdersComponent implements OnInit {
     return '';
   }
 
+  
+
+  removeDeal(deal:Offer, seat:{id:number | null, seatNumber:number})
+  {
+    console.log(deal);
+    console.log(seat);
+    
+  }
+
 
 }

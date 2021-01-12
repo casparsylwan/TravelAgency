@@ -2,9 +2,10 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Authentication } from 'src/app/models/Authentication';
-import { Customer } from 'src/app/models/Customer';
+import { Customer, CustomerAdminView } from 'src/app/models/Customer';
 import { LoginAuthService } from 'src/app/service/login-auth.service';
 import { SessionService } from 'src/app/service/session.service';
+import { TravelService } from 'src/app/service/travel.service';
 import { StateService } from 'src/app/shared/state.service';
 
 
@@ -29,6 +30,7 @@ export class PasswordLoginComponent implements OnInit {
               private fb:FormBuilder,
               private state:StateService,
               private httpLogin:LoginAuthService,
+              private travelService:TravelService,
               private route:ActivatedRoute,
               private router:Router,
               private session:SessionService
@@ -54,12 +56,25 @@ export class PasswordLoginComponent implements OnInit {
     this.httpLogin.httpLogin(body).subscribe((jwt) =>{
 
 
-        this.httpLogin.httpGetCustomer(body.username, jwt.jwt ).subscribe((customer:Customer) =>{
+        this.httpLogin.httpGetCustomer(body.username, jwt.jwt ).subscribe((customer:CustomerAdminView) =>{
 
+          console.log("LoGiN: ", customer);
           customer.jwt = jwt.jwt;
-          this.state.setCustomer(customer);
-          sessionStorage.setItem('travelux', JSON.stringify(this.customer$))
-          this.router.navigate(['/mypages'])
+          let travelOrders:number[] =[];
+          customer.travelOrders.forEach((order) => {
+            if(order?.id != null)
+            {
+              travelOrders.push(order.id)
+            }
+            
+          })
+          this.travelService.getCustomersOffers(travelOrders, jwt.jwt).subscribe((orders) =>{
+    
+            
+            this.state.setCustomer(customer);
+            sessionStorage.setItem('travelux', JSON.stringify(this.customer$))
+            this.router.navigate(['/mypages'])
+          })          
       })
     })
 

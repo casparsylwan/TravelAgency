@@ -5,6 +5,7 @@ import { Observable, throwError } from 'rxjs';
 import { StateService } from '../shared/state.service';
 import { Customer, CustomerAdminView } from '../models/Customer';
 import { Router } from '@angular/router';
+import { TravelService } from './travel.service';
 
 
 
@@ -18,6 +19,7 @@ export class LoginAuthService implements OnInit{
 
   constructor(
               private http:HttpClient,
+              private travelService:TravelService,
               private state:StateService,
               private router:Router
               ) { }
@@ -32,9 +34,29 @@ export class LoginAuthService implements OnInit{
   httpGetCustomerAndSetState(email:string, jwt:string):void
   {
     this.httpGetCustomer(email, jwt).subscribe((customer) => {
-
+      
+      let travelOrders:number[] = []; 
+      let idAndSeat:{id:number, seatNumber:number}[] = []
       customer.jwt = jwt;
-      this.state.setCustomer(customer);
+      customer.travelOrders.forEach((order) => {
+        if(order?.id != null)
+        {
+          
+          idAndSeat.push({id:order.id, seatNumber:order.seatNumber})
+          travelOrders.push(order.id)
+          
+        }
+        
+      })
+      console.log(travelOrders);
+      this.travelService.getCustomersOffers(travelOrders, jwt).subscribe((orders) =>{
+        console.log("1234",  orders);
+        customer.travelOrders = orders;
+        customer.orders = idAndSeat;
+        this.state.setCustomer(customer);
+
+      })
+      
         
     },
     (error) =>{
@@ -50,7 +72,7 @@ export class LoginAuthService implements OnInit{
     return this.http.post<Customer>(`${this.baseUrl}/customer/new`, body);
   }
 
-  httpGetCustomer(email:string, jwt:string):Observable<Customer>
+  httpGetCustomer(email:string, jwt:string):Observable<CustomerAdminView>
   {
     
     const httpHeaders = new HttpHeaders({
@@ -58,7 +80,7 @@ export class LoginAuthService implements OnInit{
       'Authorization': 'Bearer '+ jwt
     });
 
-    return this.http.get<Customer>(`${this.baseUrl}/customer/${email}`, {headers: httpHeaders})
+    return this.http.get<CustomerAdminView>(`${this.baseUrl}/customer/${email}`, {headers: httpHeaders})
   }
 
   httpGetAllCustomers(jwt:string):Observable<CustomerAdminView[]>

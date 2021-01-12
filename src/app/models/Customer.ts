@@ -1,4 +1,4 @@
-import { OfferClass } from "./offer";
+import { Offer, OfferClass } from "./offer";
 
 export class Customer{
 
@@ -12,7 +12,9 @@ export class Customer{
 
     roles:string = 'CUSTOMER';
 
-    orders:OfferClass[] = []
+    orders:{id:number, seatNumber:number}[] = []
+
+    travelOrders:OfferClass[] = []
 
     constructor(jwt:string){}
 

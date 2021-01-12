@@ -25,14 +25,16 @@ export class StateService {
   
   setCustomer(customer:Customer):void
   {
-     
+     console.log("STATE::", customer);
      const customerTemp:Customer = new Customer('');
      customerTemp.jwt = customer.jwt;
      customerTemp.firstName = customer.firstName;
      customerTemp.lastName = customer.lastName;
      customerTemp.email = customer.email;
      customerTemp.roles = customer.roles;
-     customerTemp.orders = customer.orders
+
+     customerTemp.travelOrders = customer.travelOrders
+     customerTemp.orders = customer.orders;
 
      this.customer.next(customerTemp);
     

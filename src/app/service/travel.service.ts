@@ -69,7 +69,18 @@ export class TravelService implements OnInit{
       'content-type' : 'application/json',
       'Authorization': 'Bearer '+ jwt
     });
+    
     return this.http.get<Offer[]>(`${this.baseUrl}/travel/all`, {headers: httpHeaders})
+  }
+
+  public getCustomersOffers(travelOrders:number[], jwt:string):Observable<Offer[]>
+  {
+    const httpHeaders = new HttpHeaders({
+      'content-type' : 'application/json',
+      'Authorization': 'Bearer '+ jwt
+    });
+    console.log(this.http.post(`${this.baseUrl}/travel/customer`,travelOrders, {headers: httpHeaders}));
+    return this.http.post<Offer[]>(`${this.baseUrl}/travel/customer`,travelOrders , {headers: httpHeaders})
   }
 
   public createTravelOffer(body:Offer, jwt:string):Observable<Offer>
@@ -88,7 +99,7 @@ export class TravelService implements OnInit{
       'content-type' : 'application/json',
       'Authorization': 'Bearer '+ jwt
     });
-
+      
       return this.http.post<void>(`${this.baseUrl}/travel/delete/${id}`, JSON.stringify(body)  , {headers: httpHeaders})
   }
 

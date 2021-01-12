@@ -3,7 +3,7 @@
         <tr>
             <th colspan="3">Travling from</th>
             <th colspan="3">Travling to</th>
-            <th colspan="3">Your price</th>
+            <th colspan="5">Your price</th>
         </tr>
         <tr>
           <th>Airport</th>
@@ -13,14 +13,16 @@
           <th>Country</th>
           <th>City</th>
           <th>Date</th>
+          <th>seat</th>
           <th>price</th>
           <th *ngIf="customer$ != null && customer$.roles == 'CUSTOMER'" >Paid</th>
           <th *ngIf="customer$ != null && customer$.roles == 'ADMIN'" >Remove</th>
+          <th>Remove</th>
         </tr>
     </thead>
     <tbody>
         <ng-container *ngIf="customer$ != null" >
-            <tr *ngFor="let deal of customer$.orders" ><!-- *ngFor="let airport of airports$" -->
+            <tr *ngFor="let deal of customer$.travelOrders; let i = index" ><!-- *ngFor="let airport of airports$" -->
                 <ng-container *ngIf="deal.fromAirport != null &&  deal.toAirport != null">
                     <td>{{ deal.fromAirport.name }}</td>
                     <td>{{ deal.fromAirport.country }}</td>
@@ -29,11 +31,13 @@
                     <td>{{ deal.toAirport.country }}</td>
                     <td> {{ deal.toAirport.city }}</td>
                     <td> {{ createDate(deal.depatureDate) }}</td>
+                    <td>{{ customer$.orders[i].seatNumber | json }}</td>
                     <td >{{ deal.price }} kr </td>
                     <ng-container *ngIf="customer$ != null && customer$.roles == 'CUSTOMER'">
                         <td [ngClass]="{'not': !deal.paid, 'true': deal.paid } " class="paid"> {{isPaid(deal)}}</td>
                     </ng-container>
                     <td class="remove" *ngIf="customer$ != null && customer$.roles == 'ADMIN'" ></td>
+                    <td (click)="removeDeal(deal, customer$.orders[i].seatNumber)" class="remove" ></td>
                 </ng-container>
             </tr>
         </ng-container>    

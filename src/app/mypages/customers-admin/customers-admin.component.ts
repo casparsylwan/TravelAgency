@@ -37,6 +37,7 @@ export class CustomersAdminComponent implements OnInit {
     if(this.customer$ != null && this.customer$.jwt.length>5)
     {
       this.loginAuth.httpGetAllCustomers(this.customer$.jwt).subscribe((customers) =>{
+        console.log(customers);
         this.customers = customers;
         
       },

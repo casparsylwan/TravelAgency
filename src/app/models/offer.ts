@@ -10,6 +10,7 @@ export interface Offer
     price:number | null;
     depatureDate:Date | null;
     paid:boolean;
+    seatNumber:number;
 }
 
 export class OfferClass implements Offer{
@@ -21,6 +22,7 @@ export class OfferClass implements Offer{
     price: number | null = null;
     depatureDate: Date | null = null;
     paid:boolean = false;
+    seatNumber:number = -1;
 
     constructor(fromAirport:Airport, toAirport: Airport, price: number, depatureDate: Date ){}
 
