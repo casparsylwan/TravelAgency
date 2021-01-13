@@ -80,8 +80,12 @@ export class MyOrdersComponent implements OnInit {
             })
             travelDeal.push(product.travel)    
             });
-            this.customer$.travelOrders = travelDeal
-            this.customer$.orders = travelOrders
+            if(this.customer$ != null){
+
+              this.customer$.travelOrders = travelDeal
+              this.customer$.orders = travelOrders
+            }
+            
             
           }) 
         },

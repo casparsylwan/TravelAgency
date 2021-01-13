@@ -143,9 +143,13 @@ export class MypageOfferComponent implements OnInit {
           })
           travelDeal.push(product.travel)    
           });
-          this.customer$.travelOrders = travelDeal
-          this.customer$.orders = travelOrders
-          this.router.navigate(['/mypages/myorders'])
+          if(this.customer$ != null)
+          {
+            this.customer$.travelOrders = travelDeal
+            this.customer$.orders = travelOrders
+            this.router.navigate(['/mypages/myorders'])
+          }
+          
         })
       })
       
