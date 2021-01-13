@@ -110,5 +110,62 @@ export class MyOrdersComponent implements OnInit {
     
   }
 
+  calculateTotal():number
+  {
+    if(this.customer$ != null)
+    {
+      let sum = 0;
+      this.customer$.travelOrders.forEach((order) =>{
+        order.price != null? sum = sum + order.price : sum;
+      })
+      return sum;
+    }
+    else
+    {
+      
+      return 0;
+    }
+  }
+
+  calculateToPaye():number
+  {
+    if(this.customer$ != null)
+    {
+      let sum = 0;
+      this.customer$.travelOrders
+
+      for(let i = 0; i < this.customer$.travelOrders.length; i++)
+      {
+        (!this.customer$.orders[i].paid)? sum = this.customer$.travelOrders[i].price + sum : sum;
+      }
+      return sum
+    }
+    else
+    {
+      
+      return 0;
+    }
+  }
+
+  calculatePayed():number
+  {
+    if(this.customer$ != null)
+    {
+      let sum = 0;
+      this.customer$.travelOrders
+
+      for(let i = 0; i < this.customer$.travelOrders.length; i++)
+      {
+        (this.customer$.orders[i].paid)? sum = this.customer$.travelOrders[i].price + sum : sum;
+      }
+      return sum
+    }
+    else
+    {
+      
+      return 0;
+    }
+  }
+
 
 }

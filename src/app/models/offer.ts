@@ -7,7 +7,7 @@ export interface Offer
     plane:Plane | null;
     fromAirport:Airport | null;
     toAirport:Airport | null;
-    price:number | null;
+    price:number;
     depatureDate:Date | null;
     paid:boolean;
     seatNumber:number;
@@ -19,7 +19,7 @@ export class OfferClass implements Offer{
     plane:Plane | null = null;
     fromAirport: Airport | null = null;
     toAirport: Airport | null = null;
-    price: number | null = null;
+    price: number = 0;
     depatureDate: Date | null = null;
     paid:boolean = false;
     seatNumber:number = -1;
