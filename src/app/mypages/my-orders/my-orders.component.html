@@ -3,7 +3,7 @@
         <tr>
             <th colspan="3">Travling from</th>
             <th colspan="3">Travling to</th>
-            <th colspan="5">Your price</th>
+            <th colspan="6">Your price</th>
         </tr>
         <tr>
           <th>Airport</th>
@@ -18,6 +18,7 @@
           <th *ngIf="customer$ != null && customer$.roles == 'CUSTOMER'" >Paid</th>
           <th *ngIf="customer$ != null && customer$.roles == 'ADMIN'" >Remove</th>
           <th>Remove</th>
+          <th></th>
         </tr>
     </thead>
     <tbody>
@@ -34,13 +35,15 @@
                     <td>{{ customer$.orders[i].seatNumber | json }}</td>
                     <td >{{ deal.price }} kr </td>
                     <ng-container *ngIf="customer$ != null && customer$.roles == 'CUSTOMER'">
-                        <td [ngClass]="{'not': !deal.paid, 'true': deal.paid } " class="paid"> {{isPaid(deal)}}</td>
+                        <td [ngClass]="{'not': !customer$.orders[i].paid , 'true': customer$.orders[i].paid} " class="paid"> {{isPaid(customer$.orders[i].paid)}}</td>
                     </ng-container>
                     <td class="remove" *ngIf="customer$ != null && customer$.roles == 'ADMIN'" ></td>
                     <td (click)="removeDeal(deal, customer$.orders[i])" class="remove" ></td>
+                    <td (click)="paySeat(customer$.orders[i])" >PAY</td>
                 </ng-container>
             </tr>
         </ng-container>    
     </tbody>
 </table>
+
 

@@ -41,15 +41,15 @@ export class TravelService implements OnInit{
     return this.http.post<Airport>(`${this.baseUrl}/airport/new`, body, {headers: httpHeaders})
   }
 
-  getAllPlanes(jwt:string):Observable<Plane[]>
+  getAllPlanes():Observable<Plane[]>
   {
 
-    const httpHeaders = new HttpHeaders({
-      'content-type' : 'application/json',
-      'Authorization': 'Bearer '+ jwt
-    });
+    // const httpHeaders = new HttpHeaders({
+    //   'content-type' : 'application/json',
+    //   'Authorization': 'Bearer '+ jwt
+    // });
 
-    return this.http.get<Plane[]>(`${this.baseUrl}/airplanes/all`, {headers: httpHeaders})
+    return this.http.get<Plane[]>(`${this.baseUrl}/airplanes/all`)
   }
 
   createAirplane(body:Plane ,jwt:string):Observable<Plane>
@@ -83,7 +83,7 @@ export class TravelService implements OnInit{
     return this.http.post<Offer[]>(`${this.baseUrl}/travel/customer`,travelOrders , {headers: httpHeaders})
   }
 
-  public getCustomersOrderId(email:string, jwt:string):Observable<{id:number, seatNumber:number, travel:Offer}[]>
+  public getCustomersOrderId(email:string, jwt:string):Observable<{id:number, seatNumber:number, paid:boolean, travel:Offer}[]>
   {
 
     const httpHeaders = new HttpHeaders({
@@ -91,7 +91,7 @@ export class TravelService implements OnInit{
       'Authorization': 'Bearer '+ jwt
     });
 
-    return this.http.get<{id:number, seatNumber:number, travel:Offer}[]>(`${this.baseUrl}/travel/customerorder/${email}`, {headers: httpHeaders})
+    return this.http.get<{id:number, seatNumber:number, paid:boolean, travel:Offer}[]>(`${this.baseUrl}/travel/customerorder/${email}`, {headers: httpHeaders})
   }
 
   public createTravelOffer(body:Offer, jwt:string):Observable<Offer>
@@ -122,6 +122,17 @@ export class TravelService implements OnInit{
       'Authorization': 'Bearer '+ jwt
     });
     return this.http.post<Customer>(`${this.baseUrl}/seat/new/${travelId}`, body, {headers: httpHeaders})
+
+  }
+
+  public payeSeat(id:number, jwt:string):Observable<void>
+  {
+    const httpHeaders = new HttpHeaders({
+      'content-type' : 'application/json',
+      'Authorization': 'Bearer '+ jwt
+    });
+
+    return this.http.get<void>(`${this.baseUrl}/seat/pay/${id}`, {headers: httpHeaders})
 
   }
 

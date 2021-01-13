@@ -129,7 +129,7 @@ export class MypageOfferComponent implements OnInit {
     {
       let jwt = this.customer$.jwt
       let email = this.customer$.email
-      let travelOrders:{id:number, seatNumber:number}[] =  [];
+      let travelOrders:{id:number, seatNumber:number, paid:boolean}[] =  [];
       let travelDeal:Offer[] = [];
 
       this.travelService.buyTravelSeat(seat, this.customer$?.jwt, deal?.id).subscribe((customer)=>{
@@ -139,7 +139,8 @@ export class MypageOfferComponent implements OnInit {
           customerOrder.forEach( product => {
             travelOrders.push({
               id: product.id,
-              seatNumber: product.seatNumber
+              seatNumber: product.seatNumber,
+              paid: product.paid
           })
           travelDeal.push(product.travel)    
           });

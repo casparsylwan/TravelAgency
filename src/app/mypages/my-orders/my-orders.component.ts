@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from 'src/app/models/Customer';
 import { Offer } from 'src/app/models/offer';
+import { Seat } from 'src/app/models/seat';
 import { TravelService } from 'src/app/service/travel.service';
 import { StateService } from 'src/app/shared/state.service';
 
@@ -43,20 +44,31 @@ export class MyOrdersComponent implements OnInit {
     return '0'.repeat(l - snl) + sn
   }
 
-  isPaid(offer:Offer):string
+  isPaid(seat:any):string
   {
-    if(offer.paid)
+    console.log(seat);
+    if(seat)
     {
       return "DONE"
     }
-    else if(!offer.paid)
+    else if(!seat)
     {
       return "Pending"; 
     }
     return '';
   }
 
-  
+  paySeat(seat:any)
+  {
+    if(this.customer$ != null)
+    {
+        this.travelService.payeSeat(seat.id, this.customer$.jwt).subscribe(()=>{
+              seat.paid = true;
+              console.log(seat);
+            })
+    }
+    
+  }
 
   removeDeal(deal:Offer, seat:{id:number | null, seatNumber:number})
   {
@@ -67,7 +79,7 @@ export class MyOrdersComponent implements OnInit {
     {
       let email:string = this.customer$.email;
       let jwt:string = this.customer$.jwt;
-      let travelOrders:{id:number, seatNumber:number}[] =  [];
+      let travelOrders:{id:number, seatNumber:number, paid:boolean}[] =  [];
       let travelDeal:Offer[] = [];
 
         this.travelService.removeSeatFromCustomerAndTravel(this.customer$?.email, deal.id, seat.id, this.customer$.jwt).subscribe(()=>{
@@ -76,7 +88,8 @@ export class MyOrdersComponent implements OnInit {
             customerOrder.forEach( product => {
               travelOrders.push({
                 id: product.id,
-                seatNumber: product.seatNumber
+                seatNumber: product.seatNumber,
+                paid: product.paid
             })
             travelDeal.push(product.travel)    
             });

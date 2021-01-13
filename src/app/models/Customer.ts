@@ -12,7 +12,7 @@ export class Customer{
 
     roles:string = 'CUSTOMER';
 
-    orders:{id:number, seatNumber:number}[] = []
+    orders:{id:number, seatNumber:number, paid:boolean}[] = []
 
     travelOrders:OfferClass[] = []
 

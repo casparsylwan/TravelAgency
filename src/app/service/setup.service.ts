@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { StateService } from '../shared/state.service';
 import { SessionService } from './session.service';
 import { TravelService } from './travel.service';
 
@@ -14,14 +15,19 @@ export class SetupService {
   constructor(
               private http:HttpClient,
               private travelServis:TravelService,
-              private session:SessionService
+              private session:SessionService,
+              private state:StateService
               ) { }
 
   public setUpCall():Observable<any>
   {
     this.session.getCustomerFromSessionStorage();
     this.travelServis.allAirports();
+    this.travelServis.getAllPlanes().subscribe((planes) =>{
+      this.state.addPlanes(planes);
+    })
     return this.http.get(`${this.baseUrl}/ping`, {responseType:'text'})
   }
+
 
 }

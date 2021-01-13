@@ -35,13 +35,14 @@ export class StateService {
 
      customerTemp.travelOrders = customer.travelOrders
      customerTemp.orders = customer.orders;
-
+    console.log('T:',customerTemp.orders)
      this.customer.next(customerTemp);
     
   }
 
   addPlane(plane:Plane)
   {
+    
     const planesTemp = [...this.airPlanes.value, plane]
     this.airPlanes.next(planesTemp);
 
@@ -49,8 +50,10 @@ export class StateService {
 
   addPlanes(planes:Plane[])
   {
+    const airPlanesTemp = this.airPlanes.value;
     const planesTemp = [...this.airPlanes.value, ...planes]
     this.airPlanes.next(planesTemp);
+    // this.airPlanes.fid
   }
 
   addAirport(airport:Airport)

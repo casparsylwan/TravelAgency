@@ -36,13 +36,13 @@ export class LoginAuthService implements OnInit{
     this.httpGetCustomer(email, jwt).subscribe((customer) => {
       
       let travelOrders:number[] = []; 
-      let idAndSeat:{id:number, seatNumber:number}[] = []
+      let idAndSeat:{id:number, seatNumber:number, paid:boolean}[] = []
       customer.jwt = jwt;
       customer.travelOrders.forEach((order) => {
         if(order?.id != null)
         {
           
-          idAndSeat.push({id:order.id, seatNumber:order.seatNumber})
+          idAndSeat.push({id:order.id, seatNumber:order.seatNumber, paid:order.paid})
           travelOrders.push(order.id)
           
         }

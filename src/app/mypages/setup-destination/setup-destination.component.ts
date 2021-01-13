@@ -53,14 +53,8 @@ export class SetupDestinationComponent implements OnInit {
 
   ngOnInit(): void 
   {
-    this.state.customer$.subscribe((customer) => {
-      
-      this.customer$ = customer 
-      if(!this.planesRecieved && this.customer$?.jwt.length>5)
-      {
-        this.getAllPlanes();
-      }
-      
+    this.state.customer$.subscribe((customer) => {      
+      this.customer$ = customer       
     });
     this.state.airports$.subscribe((airports) => this.airports$ = airports);
     this.state.airPlanes$.subscribe((plane) => this.planes$ = plane);
@@ -76,27 +70,16 @@ export class SetupDestinationComponent implements OnInit {
         name: this.planeForm.value.name,
         numberOfSeats: this.planeForm.value.numberOfSeats
       }
-      console.log(body);
+      
       this.travelService.createAirplane(body, this.customer$.jwt).subscribe((plane) => {
 
         this.state.addPlane(plane);
-
+        this.planeForm.reset();
       })
     }
 
   }
 
-  public getAllPlanes()
-  {
-    if(this.customer$ != undefined)
-    {
-      this.travelService.getAllPlanes(this.customer$.jwt).subscribe((planes) => {
-
-        this.state.addPlanes(planes);
-        this.planesRecieved = true;
-      })
-    }
-  }
 
   public createAirport()
   {
@@ -167,7 +150,7 @@ export class SetupDestinationComponent implements OnInit {
                      depatureDate: this.airportForm.value.departureDate, //,
                      price: this.airportForm.value.price
                     }
-    console.log(body);
+    
     if(this.customer$ != null)
     {
        this.travelService.createTravelOffer(body, this.customer$.jwt).subscribe((offer) => console.log(offer));

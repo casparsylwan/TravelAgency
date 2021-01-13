@@ -61,7 +61,7 @@ export class PasswordLoginComponent implements OnInit {
 
           console.log("LoGiN: ", customer);
           customer.jwt = jwt.jwt;
-          let travelOrders:{id:number, seatNumber:number}[] =  [];
+          let travelOrders:{id:number, seatNumber:number, paid:boolean}[] =  [];
           let travelDeal:Offer[] = [];
           
           this.travelService.getCustomersOrderId(customer.email, customer.jwt).subscribe((customerOrder)=> {
@@ -69,7 +69,8 @@ export class PasswordLoginComponent implements OnInit {
             customerOrder.forEach( product => {
               travelOrders.push({
                 id: product.id,
-                seatNumber: product.seatNumber
+                seatNumber: product.seatNumber,
+                paid: product.paid
             })
             travelDeal.push(product.travel)    
             });
